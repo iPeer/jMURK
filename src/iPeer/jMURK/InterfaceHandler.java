@@ -1,5 +1,6 @@
 package iPeer.jMURK;
 
+import javax.swing.*;
 
 public class InterfaceHandler {
 	
@@ -9,6 +10,11 @@ public class InterfaceHandler {
 		jMURKHub m = new jMURKHub();
 		m.create();
 		//jMURKHub.create();
+	}
+	public void jMURKTestDialog(JFrame parent) {
+		jMURKTestDialog td = new jMURKTestDialog(parent);
+		td.create();
+		
 	}
 
 }

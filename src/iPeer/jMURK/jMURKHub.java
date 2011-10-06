@@ -46,7 +46,6 @@ public class jMURKHub implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent a) {
-		System.out.println(a);
 		ClickHandler.ClickJFrame("jMURKHub", a, f);
 	}
 	public JFrame f;
