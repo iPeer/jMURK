@@ -10,7 +10,7 @@ public class jMURKHub implements ActionListener {
 		
 		// Window title and button crap goes here...
 		
-		f = new JFrame("MURK Hub");
+		f = new JFrame("Hi mum!");
 		b = new JButton("Test! :)");
 		b2 = new JButton("Close");
 	}
