@@ -41,10 +41,6 @@ public class jMURKHub implements ActionListener {
 		});
 	}
 	
-	public void close() {
-		ExitHandler.closeJFrame(f);
-	}
-	
 	public void actionPerformed(ActionEvent a) {
 		ClickHandler.ClickJFrame("jMURKHub", a, f);
 	}
