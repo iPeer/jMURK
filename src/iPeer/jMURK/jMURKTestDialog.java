@@ -10,8 +10,8 @@ public class jMURKTestDialog implements ActionListener {
 	public jMURKTestDialog(JFrame parent) {
 		f = new JDialog(parent, "TEST DIALOG!!11!");
 		b = new JButton("Close Me");
-		b2 = new JButton("WriteINI");
-		b3 = new JButton("ReadINI");
+		b2 = new JButton("Save Game");
+		b3 = new JButton("New Game");
 		l = new JLabel("Looks like you found my seekrit little test dialog, aren't you sneaky!");
 	}
 	
