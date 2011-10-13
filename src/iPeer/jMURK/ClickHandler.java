@@ -5,6 +5,7 @@ import javax.swing.*;
 
 public class ClickHandler {
 
+	@SuppressWarnings("unchecked")
 	public static void ClickJDialog (String win, ActionEvent e, JDialog d) {
 		String cmd = e.getActionCommand();
 		if (win == "jMURKTestDialog") {
@@ -15,9 +16,9 @@ public class ClickHandler {
 			}
 			else if (cmd == "New Game") {
 				plyr = new Player("Test Save");
-				System.out.println(plyr.HP);
-				System.out.println(plyr.Name);
-				plyr.CC = 1337;
+				System.out.println(plyr.p.get("HP"));
+				System.out.println(plyr.p.get("Name"));
+				plyr.p.put("CC", Integer.toString(1337));
 			}
 		}
 	}
