@@ -28,7 +28,6 @@ public class jMURKStartDialog implements ActionListener {
 		f.add(b2);
 		f.add(l);
 		Dimension s = b3.getPreferredSize();
-			// Divide by 10 to center... because the proper way doesn't work...
 		b3.setBounds(400 - (s.width+8), bposy, s.width, s.height);
 		s = b.getPreferredSize();
 		b.setBounds(2, bposy, s.width, s.height);
