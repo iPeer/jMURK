@@ -51,6 +51,10 @@ public class ClickHandler {
 				else 
 					return;
 			}
+			else if (cmd == "Load Game") {
+				LoadGameDialog l = new LoadGameDialog(f);
+				l.create();
+			}
 			else
 				ErrorHandler.e(2, "ID not handled.");
 	}
