@@ -6,7 +6,7 @@ import java.util.*;
 @SuppressWarnings({ "unchecked", "rawtypes" }) // It's mixed data, so this shuts the compiler up about warnings. Doesn't actually effect the user at all.
 public class Player {
 	public Player(String n) {
-		String inventory[] = {"Baul|5", "Wooden Sword|1", "Leather Schlacks|1", "Leather Tunic|1", "Leather Cap|1", "Golden Pendant|1"};
+		String inventory = "Baul|5,Wooden Sword|1,Leather Schlacks|1,Leather Tunic|1,Leather Cap|1,Golden Pendant|1";
 		p.put("HP", Integer.toString(100));
 		p.put("CHP", Integer.toString(100));
 		p.put("EXP", Integer.toString(60));
@@ -48,7 +48,7 @@ public class Player {
 			try
 			{
 				sf2.putAll(p);
-				sf2.store(new FileOutputStream(sf), "jMURK Save Game");
+				sf2.store(new /*OutputStream*/FileWriter(sf), "jMURK Save Game");
 				System.out.println("Player: Save successful.");
 			}
 			catch (Exception e) {
@@ -66,7 +66,7 @@ public class Player {
 			try {
 				l.load(new FileInputStream(f));
 				p.putAll(l);
-				System.out.println(l.get("CC"));
+				System.out.println(l.get("Inventory"));
 				System.out.println("Player: Loaded save game successfully.");
 			}
 			catch (Exception e) {
@@ -80,11 +80,11 @@ public class Player {
 	public int HP, AP, CC, Wins, Loses, Coins, StealSuccess, StealFail, FoundItems;
 	public String Name, SaveName, tempSaveName;
 	public static Hashtable p = new Hashtable();
-	public String Armours[] = {"Leather Tunic", "Leather Schlacks", "Leather Cap"};
-	public String Weapons[] = {"Wooden Sword"};
-	public String Aid[] = {"Baul"};
-	public String Pendants[] = {"Golden Pendant"};
-	public String Shields[] = { };
-	public String Misc[] = { };
+	public String[] Armours = {"Leather Tunic", "Leather Schlacks", "Leather Cap"};
+	public String[] Weapons = {"Wooden Sword"};
+	public String[] Aid = {"Baul"};
+	public String[] Pendants = {"Golden Pendant"};
+	public String[] Shields = { };
+	public String[] Misc = { };
 
 }
