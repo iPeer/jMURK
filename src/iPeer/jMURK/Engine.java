@@ -11,8 +11,25 @@ public class Engine {
 		return Integer.parseInt(PlayerHandler.plyr.p.get(key).toString());
 		
 	}
+	
+	public static int getPlayerLevel() {
+		return intValue("LVL");
+	}
+	
+	public static int getPlayerCritIncreaseChance() {
+		int chance = 25;
+		return PlayerHandler.playerHasItem("Critical Up", 1) ? chance*2 : chance;
+	}
 
-	public static int playerHP() {
+	public static int getPlayerEXP() {
+		return intValue("EXP");
+	}
+	
+	public static int getPlayerCC() {
+		return intValue("CC");
+	}
+	
+	public static int getPlayerHP() {
 		return intValue("HP");
 	}
 	

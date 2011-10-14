@@ -8,9 +8,11 @@ public class jMURKHub implements ActionListener {
 	
 	public jMURKHub() { 
 		
+		System.out.println("InterfaceHandler: jMURKStartDialog");
+		
 		// Window title and button crap goes here...
 		
-		f = new JFrame("Hi mum!");
+		f = new JFrame("jMURK Hub");
 		b = new JButton("Test! :)");
 		b2 = new JButton("Close");
 	}
