@@ -8,7 +8,7 @@ public class jMURKHub implements ActionListener {
 	
 	public jMURKHub() { 
 		
-		System.out.println("InterfaceHandler: jMURKStartDialog");
+		System.out.println("InterfaceHandler: jMURKHub");
 		
 		// Window title and button crap goes here...
 		

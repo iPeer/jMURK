@@ -9,7 +9,7 @@ public class jMURKStartDialog implements ActionListener {
 	public jMURKStartDialog() {
 		System.out.println("InterfaceHandler: jMURKStartDialog");
 		f = new JFrame("jMURK");
-		l = new JLabel("Choose an option below to begin, or not if you pick\n the quit option...");
+		l = new JLabel("Choose an option below to begin, or not if you pick the quit option...");
 		b = new JButton("New Game");
 		b2 = new JButton("Load Game");
 		b3 = new JButton("Quit jMURK");

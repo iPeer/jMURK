@@ -11,6 +11,7 @@ public class PlayerHandler {
 	public PlayerHandler() { }
 	
 	public static void startNewGame(String charname) {
+		System.out.println("Starting new game with name "+charname);
 		plyr = new Player(charname);
 		//completeQuest(plyr, 1);
 	}

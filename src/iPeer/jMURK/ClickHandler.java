@@ -12,7 +12,7 @@ public class ClickHandler {
 		if (win == "jMURKTestDialog") {
 			if (cmd == "Close Me") { ExitHandler.closeJDialog(d); }
 			else if (cmd == "Save Game") {
-				PlayerHandler.startNewGame("Testing new Loading and Saving");
+				//PlayerHandler.startNewGame("Testing new Loading and Saving");
 				System.out.println(Engine.getPlayerHP());
 				System.out.println(PlayerHandler.plyr.p.get("Name"));
 				PlayerHandler.plyr.p.put("CC", Integer.toString(1337));
@@ -44,6 +44,13 @@ public class ClickHandler {
 		else if (win == "jMURKStartDialog")
 			if (cmd == "Quit jMURK")
 				ExitHandler.closeJFrame(f);
+			else if (cmd == "New Game") {
+				String charname = JOptionPane.showInputDialog(f,"Enter your character's name:",null,1);
+				if (charname != null)
+					PlayerHandler.startNewGame(charname);
+				else 
+					return;
+			}
 			else
 				ErrorHandler.e(2, "ID not handled.");
 	}
