@@ -4,11 +4,11 @@ package iPeer.jMURK;
 public class Engine {
 
 	public static String saveName() {
-		return ClickHandler.plyr.p.get("SaveName").toString();
+		return PlayerHandler.plyr.p.get("SaveName").toString();
 	}
 	
 	public static int intValue(String key) {
-		return Integer.parseInt(Player.p.get(key).toString());
+		return Integer.parseInt(PlayerHandler.plyr.p.get(key).toString());
 		
 	}
 
