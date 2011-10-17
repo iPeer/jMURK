@@ -1,5 +1,8 @@
 package iPeer.jMURK;
 
+import java.io.*;
+import java.util.*;
+
 @SuppressWarnings("static-access")
 public class Engine {
 
@@ -43,6 +46,17 @@ public class Engine {
 	
 	public static boolean isGameLoaded() {
 		return !PlayerHandler.plyr.p.isEmpty();
+	}
+	
+	public static int[] getWeaponDam(String weapon) {
+		InputStream is = Engine.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/item/"+weapon+".dat");	
+		Properties p = new Properties();
+		try { p.load(is); is.close(); }
+		catch (Exception e) { ErrorHandler.e(1,"Unable to read resource."); }
+		int dam1 = Integer.parseInt(p.get("minDam").toString());
+		int dam2 = Integer.parseInt(p.get("maxDam").toString());
+		int[] damOut = {dam1, dam2};
+		return damOut; // 0 = min, 1 = max
 	}
 	
 	public double jMURKVERSION = 0.1;
