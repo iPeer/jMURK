@@ -38,5 +38,9 @@ public class Engine {
 	}
 	
 	public double jMURKVERSION = 0.1;
+
+	public static String getPlayerInventory() {
+		return PlayerHandler.plyr.p.get("Inventory").toString();
+	}
 	
 }

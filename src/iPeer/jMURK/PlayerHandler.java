@@ -1,9 +1,8 @@
 package iPeer.jMURK;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.*;
+import java.util.regex.*;
 
 @SuppressWarnings( {"unchecked", "static-access", "unused"} )
 public class PlayerHandler {
@@ -13,10 +12,10 @@ public class PlayerHandler {
 	public static void startNewGame(String charname) {
 		System.out.println("Starting new game with name "+charname);
 		plyr = new Player(charname);
-		//completeQuest(plyr, 1);
+		save(1);
 	}
 	
-	public void save (int auto) 
+	public static void save (int auto) 
 	{
 		System.out.println("Player: Attempting to save...");
 		if (plyr.p.isEmpty()) {
@@ -24,21 +23,18 @@ public class PlayerHandler {
 			return;
 		}
 		else {
-			if (auto == 1)
-				tempSaveName = "autosave";
-			else
-				tempSaveName = Engine.saveName();	
-			File sd = new File("saves/");
+			tempSaveName = Engine.saveName();	
+			File sd = new File("saves/"+tempSaveName);
 			if (!sd.exists())
 				sd.mkdirs();
-			File sf = new File(sd,tempSaveName+".msf");
+			File sf = new File(sd,auto == 1 ? "autosave.msf" : "save.msf");
 			System.out.println(sd.getAbsolutePath());
 			System.out.println(sf.getAbsolutePath());
 			Properties sf2 = new Properties();
 			try
 			{
 				sf2.putAll(plyr.p);
-				sf2.store(new /*OutputStream*/FileWriter(sf), "jMURK Save Game");
+				sf2.store(new FileOutputStream(sf), "jMURK Save Game");
 				System.out.println("Player: Save successful.");
 			}
 			catch (Exception e) {
@@ -55,8 +51,7 @@ public class PlayerHandler {
 			Properties l = new Properties();
 			try {
 				l.load(new FileInputStream(f));
-				PlayerHandler.plyr.p.putAll(l);
-				System.out.println(l.get("Inventory"));
+				plyr.p.putAll(l);
 				System.out.println("Player: Loaded save game successfully.");
 			}
 			catch (Exception e) {
@@ -104,29 +99,92 @@ public class PlayerHandler {
 		return mexp;
 	}
 	
-	public void completeQuest(Player plyr, int questID) {
+	public static void completeQuest(int questID) {
 		int EXP = Engine.getPlayerEXP();
-		// TODO: Finish coding quest completion.		
+		// TODO: Finish coding.		
 	}
 	
-	public void addItem (Player plyr, String item, int itemQuant) {
-		// TODO: Code item adding.
+	public static void addItem (String item, int itemQuant) {
+		/* 
+		* The following regex works in mSL AND PHP. But not in Java. Fuck this shit, man.
+		* 
+		* /,?(Baul\|[0-9]+),?/
+		* /,?(Baul\|\d+),?/
+		* 
+		* * Extra escapes should be added for Java. Still doesn't work, though.
+		*/	
+		// Sadly, this has to be re-done for everything that uses it...
+		String r = "("+item+"\\|[0-9\\.]+)"; // This works...
+		String inv = Engine.getPlayerInventory();
+		Pattern p = Pattern.compile(r);
+		Matcher m = p.matcher(inv);
+		if (m.find()) {	
+			System.out.println("Inventory match: "+m.group(1));
+			String[] fullmatch = m.group(1).split("\\|");
+			String itemName = fullmatch[0];
+			int itemNumber = Integer.parseInt(fullmatch[1]);
+			itemNumber += itemQuant;
+			String newString = itemName+"|"+itemNumber;
+			String newInv = m.replaceFirst(newString);
+			plyr.p.put("Inventory", newInv);
+		}
+		else {
+			System.out.println("Adding "+itemQuant+" of '"+item+"' to the player's inventory");
+			inv = inv+","+item+"|"+itemQuant;
+			plyr.p.put("Inventory", inv);
+		}
 	}
 	
-	public void removeItem (Player plyr, String item, int itemQuant) {
-		// TODO: Code item removal.
+	public static void removeItem (String item, int itemQuant) {
+		// Sadly, this has to be re-done for everything that uses it...
+		String r = "("+item+"\\|[0-9\\.]+)"; // This works...
+		String inv = Engine.getPlayerInventory();
+		Pattern p = Pattern.compile(r);
+		Matcher m = p.matcher(inv);
+		if (m.find()) {	
+			System.out.println("Inventory match: "+m.group(1));
+			String[] fullmatch = m.group(1).split("\\|");
+			String itemName = fullmatch[0];
+			int itemNumber = Integer.parseInt(fullmatch[1]);
+			itemNumber -= itemQuant;
+			String newString = itemName+"|"+itemNumber;
+			String newInv = m.replaceFirst(itemNumber > 0 ? newString : "");
+			newInv = Utils.fixTrailingInventoryCommas(newInv);
+			System.out.println("New Inventory: "+newInv);
+			plyr.p.put("Inventory", newInv);
+		}
 	}
-	
-	public void useAid (Player plyr, String aid, int aidQuant) {
-		// TODO: Code aid usage and removal.
+
+	public static void useAid (String aid, int aidQuant) {
+		if (playerHasItem(aid, aidQuant)) {
+			removeItem(aid, aidQuant);
+		}
+		// TODO: Finish coding.
 	}
 	
 	public static boolean playerHasItem(String item, int itemQuant) {
-		return false; //TODO: You guessed it! (Code it).
+		// Sadly, this has to be re-done for everything that uses it...
+		String r = "("+item+"\\|[0-9\\.]+)";
+		String inv = Engine.getPlayerInventory();
+		Pattern p = Pattern.compile(r);
+		Matcher m = p.matcher(inv);
+		if (m.find()) {	
+			System.out.println("Inventory match: "+m.group(1));
+			String[] fullmatch = m.group(1).split("\\|");
+			int n = Integer.parseInt(fullmatch[1]);
+			if (n >= itemQuant)
+				return true;
+			else
+				return false;
+
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public static Player plyr;
-	public String tempSaveName;
+	public static String tempSaveName;
 
 	
 }
