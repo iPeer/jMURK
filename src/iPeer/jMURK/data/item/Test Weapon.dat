@@ -1,0 +1,5 @@
+name=Test Weapon
+minDam=1000
+maxDam=10000
+type=weapon
+val=0

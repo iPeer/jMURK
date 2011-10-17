@@ -1,0 +1,5 @@
+name="Leather Tunic"
+damReduce=3
+val=30
+type=armour
+subtype=armourTorso

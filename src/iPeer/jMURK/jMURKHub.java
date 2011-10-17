@@ -13,7 +13,7 @@ public class jMURKHub implements ActionListener {
 		// Window title and button crap goes here...
 
 		f = new JFrame("jMURK Hub");
-		b = new JButton("Test! :)");
+		b = new JButton("Options");
 		close = new JButton("Close");
 	}
 
@@ -23,7 +23,11 @@ public class jMURKHub implements ActionListener {
 		f.add(b);
 		Insets i = f.getInsets();
 		Dimension s = b.getPreferredSize();
-		b.setBounds(20+i.left,s.width+i.top,s.width,s.height);
+		//b.setBounds(20+i.left,s.width+i.top,s.width,s.height);
+		b.setBounds(87, 239, s.width, 20);
+		/*b.setBackground(Color.black);
+		b.setBorderPainted(false);
+		b.setForeground(Color.white);*/
 		close.addActionListener(this);
 		f.add(close);
 		s = close.getPreferredSize();
