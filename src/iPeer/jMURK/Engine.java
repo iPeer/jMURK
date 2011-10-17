@@ -33,14 +33,15 @@ public class Engine {
 		return intValue("HP");
 	}
 	
-	public static int playerCHP() {
+	public static int getPlayerCHP() {
 		return intValue("CHP");
+	}
+	
+	public static String getPlayerInventory() {
+		return PlayerHandler.plyr.p.get("Inventory").toString();
 	}
 	
 	public double jMURKVERSION = 0.1;
 
-	public static String getPlayerInventory() {
-		return PlayerHandler.plyr.p.get("Inventory").toString();
-	}
 	
 }
