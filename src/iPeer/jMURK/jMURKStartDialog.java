@@ -31,6 +31,9 @@ public class jMURKStartDialog implements ActionListener {
 		b3.setBounds(400 - (s.width+8), bposy, s.width, s.height);
 		s = b.getPreferredSize();
 		b.setBounds(2, bposy, s.width, s.height);
+		b.setToolTipText("Start a new game.");
+		b3.setToolTipText("Quit jMURK without starting or loading a game.");
+		b2.setToolTipText("Load an existing jMURK save file.");
 		s = b2.getPreferredSize();
 		b2.setBounds((200+b2.getWidth()) / 2, bposy, s.width, s.height);
 		s = l.getPreferredSize();

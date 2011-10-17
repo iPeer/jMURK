@@ -27,7 +27,8 @@ public class ClickHandler {
 	}
 
 	public static void ClickJFrame (String win, ActionEvent e, JFrame f) {
-		String cmd = e.getActionCommand();;
+		String cmd = e.getActionCommand();
+		System.out.println(e);
 		if (win == "jMURKHub") {
 
 			if (cmd == "Test! :)") {		
