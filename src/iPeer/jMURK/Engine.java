@@ -41,6 +41,10 @@ public class Engine {
 		return PlayerHandler.plyr.p.get("Inventory").toString();
 	}
 	
+	public static boolean isGameLoaded() {
+		return !PlayerHandler.plyr.p.isEmpty();
+	}
+	
 	public double jMURKVERSION = 0.1;
 
 	

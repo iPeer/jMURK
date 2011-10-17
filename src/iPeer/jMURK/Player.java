@@ -7,6 +7,9 @@ import java.util.*;
 public class Player {
 	public Player(String n) {
 		String inventory = "Baul|5,Wooden Sword|1,Leather Schlacks|1,Leather Tunic|1,Leather Cap|1,Golden Pendant|1";
+		Random r = new Random();
+		int Time = r.nextInt(1441);
+		p.put("Time", Integer.toString(Time));
 		p.put("HP", Integer.toString(100));
 		p.put("CHP", Integer.toString(100));
 		p.put("EXP", Integer.toString(0));

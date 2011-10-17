@@ -44,10 +44,16 @@ public class ClickHandler {
 		else if (win == "jMURKStartDialog")
 			if (cmd == "Quit jMURK")
 				ExitHandler.closeJFrame(f);
+				if (Engine.isGameLoaded())
+					PlayerHandler.unloadGame(); // DEBUG 
 			else if (cmd == "New Game") {
 				String charname = JOptionPane.showInputDialog(f,"Enter your character's name:",null,1);
-				if (charname != null)
+				if (charname != null) {
 					PlayerHandler.startNewGame(charname);
+					PlayerHandler.startTimerLoops();
+					GameTick gt = new GameTick();
+					gt.start();
+				}
 				else 
 					return;
 			}

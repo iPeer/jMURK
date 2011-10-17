@@ -9,6 +9,11 @@ public class PlayerHandler {
 
 	public PlayerHandler() { }
 	
+	public static void unloadGame() {
+		save(0);
+		plyr.p.clear();
+	}
+	
 	public static void startNewGame(String charname) {
 		System.out.println("Starting new game with name "+charname);
 		plyr = new Player(charname);
@@ -182,6 +187,8 @@ public class PlayerHandler {
 			return false;
 		}
 	}
+	
+	public static void startTimerLoops() { }
 	
 	public static Player plyr;
 	public static String tempSaveName;
