@@ -1,6 +1,0 @@
-name=Test Shield
-damReduce=1337
-effect=healing
-effamount=50
-val=0
-type=shield
