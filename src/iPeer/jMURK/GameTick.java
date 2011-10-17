@@ -13,7 +13,7 @@ public class GameTick {
 			tickThread.start();
 		}
 		else {
-			ErrorHandler.e(1, "tick: Cannot start tick thread while a no game is loaded.");
+			ErrorHandler.e(1, "GameTick: Cannot start tick thread while a no game is loaded.");
 			return;
 		}
 	}
@@ -24,7 +24,7 @@ public class GameTick {
 				tick();
 				try { Thread.sleep(1000L); }
 				catch (Exception e) {
-					ErrorHandler.e(1, "Unable to complete game tick!");
+					ErrorHandler.e(1, "Unable to complete game tick");
 					PlayerHandler.unloadGame();
 					return;
 				}

@@ -10,7 +10,7 @@ public class Startup {
 		try {
 			jMURKStartDialog m = new jMURKStartDialog();
 			m.create();
-			//InterfaceHandler.jMURKHub();
+			InterfaceHandler.jMURKHub();
 			System.out.println("InterfaceHandler started");
 		}
 		catch (Exception e) {

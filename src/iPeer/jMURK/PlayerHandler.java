@@ -183,12 +183,8 @@ public class PlayerHandler {
 				return false;
 
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
-	
-	public static void startTimerLoops() { }
 	
 	public static Player plyr;
 	public static String tempSaveName;

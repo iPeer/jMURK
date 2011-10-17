@@ -2,6 +2,7 @@ package iPeer.jMURK;
 
 import java.awt.event.*;
 import javax.swing.*;
+
 import java.io.*;
 
 public class ClickHandler {
@@ -28,14 +29,18 @@ public class ClickHandler {
 
 	public static void ClickJFrame (String win, ActionEvent e, JFrame f) {
 		String cmd = e.getActionCommand();
-		System.out.println(e);
 		if (win == "jMURKHub") {
 
 			if (cmd == "Test! :)") {		
 				InterfaceHandler.jMURKTestDialog(f);
 			}
 			else if (cmd == "Close") {
-				ExitHandler.closeJFrame(f);
+				if (JOptionPane.showOptionDialog(f, "Are you sure you want to quit jMURK?", "Confirm Exit", 0, 0, null, null, null) == 0) {
+					if (Engine.isGameLoaded()) { PlayerHandler.unloadGame(); }
+					System.out.println("Closed!");
+					ExitHandler.closeJFrame(f);
+					System.exit(0);
+				}
 			}
 			else {
 				ErrorHandler.e(2,"ID Not Handled!");
@@ -51,7 +56,6 @@ public class ClickHandler {
 				String charname = JOptionPane.showInputDialog(f,"Enter your character's name:",null,1);
 				if (charname != null) {
 					PlayerHandler.startNewGame(charname);
-					PlayerHandler.startTimerLoops();
 					GameTick gt = new GameTick();
 					gt.start();
 				}
