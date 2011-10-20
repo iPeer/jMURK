@@ -3,9 +3,11 @@ package iPeer.jMURK;
 import java.io.*;
 import java.util.*;
 
+@SuppressWarnings( {"unchecked", "static-access"} )
 public class ItemHandler {
 
-	public ItemHandler() { }
+	public ItemHandler() { 
+	}
 	
 	public static String getItemTypeFromList(String item) {
 		if (Armours.contains(item)) { return "armour"; }
@@ -26,10 +28,50 @@ public class ItemHandler {
 		return t;
 	}
 	
+	public static Properties getItemDataFromDat(String item) {
+		InputStream is = ItemHandler.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/item/"+item+".dat");
+		Properties i = new Properties();
+		try { i.load(is); }
+		catch (Exception e) { ErrorHandler.e(1, "Unable to load item file"); }
+		return i;
+	}
+	
+	public static Object getOtherItemValue(String item, String value) {
+		InputStream is = ItemHandler.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/item/"+item+".dat");
+		Properties i = new Properties();
+		try { i.load(is); }
+		catch (Exception e) { ErrorHandler.e(1, "Unable to load item file"); }
+		try { return i.get(value); }
+		catch (NullPointerException n) { return "unset"; }
+		}
+
+		public static String getOtherItemValueAsString(String item, String value) {
+			return getOtherItemValue(item, value).toString();
+		}
+		
+	public static void playerUnequipItem(String item) {
+		String itemType = getItemTypeFromList(item);
+		if (itemType == "weapon") {	
+			pl.plyr.p.put("Weapon", "Hands");
+		}
+		else if (itemType == "armour") {
+			Properties d = new Properties();
+			d = getItemDataFromDat(item);
+			int playerHP = Engine.getPlayerHP(), playerCHP = Engine.getPlayerCHP(), playerAP = Engine.getPlayerAP(), playerCC = Engine.getPlayerCC(); 
+			int playerDR = Engine.getPlayerDR();
+			int itemDR = (Integer)d.get("damReduce");
+			if (itemDR > 0)
+				playerDR -= itemDR;
+		}
+		
+	}
+	
 	public static List<String> Armours = Arrays.asList("Test Armour", "Leather Tunic", "Leather Slacks", "Leather Cap");
 	public static List<String> Weapons = Arrays.asList("Test Weapon", "Wooden Sword");
 	public static List<String> Aid = Arrays.asList("Test Aid", "Baul");
 	public static List<String> Pendants = Arrays.asList("Test Pendant", "Golden Pendant");
 	public static List<String> Shields = Arrays.asList("Test Shield");
 	public static List<String> Misc = Arrays.asList("Test Misc");
+	public enum itemTypes {armour, weapon, aid, pendant, shield, misc};
+	private static PlayerHandler pl;
 }

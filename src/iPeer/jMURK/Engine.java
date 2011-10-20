@@ -40,6 +40,14 @@ public class Engine {
 		return intValue("CHP");
 	}
 	
+	public static int getPlayerAP() {
+		return intValue("CC)");
+	}
+	
+	public static int getPlayerDR() {
+		return intValue("DR");
+	}
+	
 	public static String getPlayerInventory() {
 		return PlayerHandler.plyr.p.get("Inventory").toString();
 	}
@@ -60,6 +68,5 @@ public class Engine {
 	}
 	
 	public double jMURKVERSION = 0.1;
-
 	
 }
