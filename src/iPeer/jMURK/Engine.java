@@ -41,7 +41,7 @@ public class Engine {
 	}
 	
 	public static int getPlayerAP() {
-		return intValue("CC)");
+		return intValue("CC");
 	}
 	
 	public static int getPlayerDR() {

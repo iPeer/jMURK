@@ -8,7 +8,7 @@ public class ItemHandler {
 
 	public ItemHandler() { 
 	}
-	
+
 	public static String getItemTypeFromList(String item) {
 		if (Armours.contains(item)) { return "armour"; }
 		else if (Weapons.contains(item)) { return "weapon"; }
@@ -17,7 +17,7 @@ public class ItemHandler {
 		else if (Shields.contains(item)) { return "shield"; }
 		return "misc";
 	}
-	
+
 	public static String getItemTypeFromDat(String item, Boolean returnSubType) {
 		InputStream is = ItemHandler.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/item/"+item+".dat");
 		Properties i = new Properties();
@@ -27,7 +27,7 @@ public class ItemHandler {
 		if (returnSubType) { String st = i.get("subtype").toString(); return st; }
 		return t;
 	}
-	
+
 	public static Properties getItemDataFromDat(String item) {
 		InputStream is = ItemHandler.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/item/"+item+".dat");
 		Properties i = new Properties();
@@ -35,7 +35,7 @@ public class ItemHandler {
 		catch (Exception e) { ErrorHandler.e(1, "Unable to load item file"); }
 		return i;
 	}
-	
+
 	public static Object getOtherItemValue(String item, String value) {
 		InputStream is = ItemHandler.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/item/"+item+".dat");
 		Properties i = new Properties();
@@ -43,12 +43,12 @@ public class ItemHandler {
 		catch (Exception e) { ErrorHandler.e(1, "Unable to load item file"); }
 		try { return i.get(value); }
 		catch (NullPointerException n) { return "unset"; }
-		}
+	}
 
-		public static String getOtherItemValueAsString(String item, String value) {
-			return getOtherItemValue(item, value).toString();
-		}
-		
+	public static String getOtherItemValueAsString(String item, String value) {
+		return getOtherItemValue(item, value).toString();
+	}
+
 	public static void playerUnequipItem(String item) {
 		String itemType = getItemTypeFromList(item);
 		if (itemType == "weapon") {	
@@ -63,9 +63,9 @@ public class ItemHandler {
 			if (itemDR > 0)
 				playerDR -= itemDR;
 		}
-		
+
 	}
-	
+
 	public static List<String> Armours = Arrays.asList("Test Armour", "Leather Tunic", "Leather Slacks", "Leather Cap");
 	public static List<String> Weapons = Arrays.asList("Test Weapon", "Wooden Sword");
 	public static List<String> Aid = Arrays.asList("Test Aid", "Baul");
