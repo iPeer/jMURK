@@ -13,6 +13,9 @@ public class jMURKStartDialog implements ActionListener {
 		b = new JButton("New Game");
 		b2 = new JButton("Load Game");
 		b3 = new JButton("Quit jMURK");
+		System.out.println(ItemHandler.getItemTypeFromList("Test Weapon"));
+		System.out.println(ItemHandler.getItemTypeFromDat("Test Shield", false));
+		System.out.println(ItemHandler.getItemTypeFromDat("Test Armour", true));
 	}
 	
 	public void create() {

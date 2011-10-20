@@ -34,11 +34,5 @@ public class Player {
 	public int HP, AP, CC, Wins, Loses, Coins, StealSuccess, StealFail, FoundItems;
 	public String Name, SaveName, tempSaveName;
 	public static Hashtable p = new Hashtable();
-	public String[] Armours = {"Test Armour", "Leather Tunic", "Leather Slacks", "Leather Cap"};
-	public String[] Weapons = {"Test Weapon", "Wooden Sword"};
-	public String[] Aid = {"Test Aid", "Baul"};
-	public String[] Pendants = {"Test Pendant", "Golden Pendant"};
-	public String[] Shields = {"Test Shield"};
-	public String[] Misc = {"Test Misc"};
 
 }

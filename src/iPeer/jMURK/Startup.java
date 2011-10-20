@@ -15,6 +15,7 @@ public class Startup {
 		}
 		catch (Exception e) {
 			ErrorHandler.e(1,"Unable to start InterfaceHandler: "+e);
+			e.printStackTrace();
 		}
 	}
 	
