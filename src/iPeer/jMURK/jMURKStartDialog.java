@@ -1,25 +1,29 @@
 package iPeer.jMURK;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class jMURKStartDialog implements ActionListener {
 
 	public jMURKStartDialog() {
 		System.out.println("InterfaceHandler: jMURKStartDialog");
+		Utils.fixFont(new Font("Tahoma", Font.PLAIN, 11));
 		f = new JFrame("jMURK");
 		l = new JLabel("Choose an option below to begin, or not if you pick the quit option...");
 		b = new JButton("New Game");
 		b2 = new JButton("Load Game");
 		b3 = new JButton("Quit jMURK");
-		System.out.println(ItemHandler.getItemTypeFromList("Test Weapon"));
-		System.out.println(ItemHandler.getItemTypeFromDat("Test Shield", false));
-		System.out.println(ItemHandler.getItemTypeFromDat("Test Armour", true));
 	}
 	
 	public void create() {
-		f.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		Dimension screen = Utils.resolution();
 		f.setLayout(null);
 		f.setSize(400,150);
@@ -62,7 +66,11 @@ public class jMURKStartDialog implements ActionListener {
 		ClickHandler.ClickJFrame("jMURKStartDialog", e, f);
 	}
 	
-	private JFrame f;
+	public static void hide() {
+		f.setVisible(false);
+	}
+	
+	private static JFrame f;
 	private JButton b, b2, b3;
 	private JLabel l;
 	

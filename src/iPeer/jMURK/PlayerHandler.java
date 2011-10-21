@@ -1,8 +1,14 @@
 package iPeer.jMURK;
 
-import java.io.*;
-import java.util.*;
-import java.util.regex.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Properties;
+import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.swing.JOptionPane;
 
 @SuppressWarnings( {"unchecked", "static-access", "unused"} )
 public class PlayerHandler {
@@ -46,6 +52,14 @@ public class PlayerHandler {
 				ErrorHandler.e(1,"Unable to create save file: "+e);
 				e.printStackTrace();
 			}
+			try { 
+				String chksum = Utils.getFileCRC32(sf);
+				chk.put(auto == 1 ? "autosave" : "save", chksum);
+				File chko = new File(sd, "hash");
+				chk.store(new FileOutputStream(chko), "jMURK Save Checksums");
+				System.out.println("Save file's CRC32 is: "+chksum);
+			}
+			catch (Exception e) { ErrorHandler.e(1, "Unable to generate CRC32 for save file."); e.printStackTrace(); }
 		}
 	}
 	public void load (File f) {
@@ -53,10 +67,21 @@ public class PlayerHandler {
 			ErrorHandler.e(2, "Trying to load file into empty hash.");
 		System.out.println(f.getAbsolutePath());
 		if (f.exists()) {
-			Properties l = new Properties();
+			try {
+				Properties checksum = new Properties();
+				checksum.load(new FileInputStream(f.getParent()+"\\hash"));
+				String cs = Utils.getFileCRC32(f);
+				if (!cs.equals(checksum.get(f.getName().replace(".msf", "")))) {
+					JOptionPane.showMessageDialog(null, "This save file appears to have been edited. Please don't do that ;)");
+					return;
+				}
+			}
+			catch (Exception e) { ErrorHandler.e(1, "Unable to load checksum for specified save file!"); e.printStackTrace(); return; }
+				Properties l = new Properties();
 			try {
 				l.load(new FileInputStream(f));
 				plyr.p.putAll(l);
+				GameTick.tickTime = Integer.parseInt(plyr.p.get("Time").toString());
 				System.out.println("Player: Loaded save game successfully.");
 			}
 			catch (Exception e) {
@@ -188,6 +213,7 @@ public class PlayerHandler {
 	
 	public static Player plyr;
 	public static String tempSaveName;
+	private static Properties chk = new Properties();
 
 	
 }

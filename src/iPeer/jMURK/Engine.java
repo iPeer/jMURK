@@ -1,7 +1,7 @@
 package iPeer.jMURK;
 
-import java.io.*;
-import java.util.*;
+import java.io.InputStream;
+import java.util.Properties;
 
 @SuppressWarnings("static-access")
 public class Engine {

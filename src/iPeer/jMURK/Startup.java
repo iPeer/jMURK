@@ -1,5 +1,7 @@
 package iPeer.jMURK;
 
+import java.io.File;
+
 public class Startup {
 	
 	public Startup() {
@@ -10,7 +12,9 @@ public class Startup {
 		try {
 			jMURKStartDialog m = new jMURKStartDialog();
 			m.create();
-			InterfaceHandler.jMURKHub();
+			//InterfaceHandler.jMURKHub();
+			PlayerHandler ph = new PlayerHandler();
+			ph.load(new File("saves/iPeer/save.msf"));
 			System.out.println("InterfaceHandler started");
 		}
 		catch (Exception e) {

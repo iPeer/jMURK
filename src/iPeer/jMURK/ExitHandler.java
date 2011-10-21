@@ -1,6 +1,7 @@
 package iPeer.jMURK;
 
-import javax.swing.*;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 public class ExitHandler {
 	

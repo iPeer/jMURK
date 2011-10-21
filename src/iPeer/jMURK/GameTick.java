@@ -33,14 +33,16 @@ public class GameTick {
 	};
 
 	public static void tick() {
-		if (tickTime == 1440)
+		if (tickTime == 1439)
 			tickTime = -1;
 		tickTime++;
+		PlayerHandler.plyr.p.put("Time", Integer.toString(tickTime));
 		System.out.println(tickTime);
+		jMURKHub.updatejMURKHub(Utils.getTicksAsGameTime(tickTime));
 
 	}
 
-	private static int tickTime;
+	static int tickTime;
 
 
 }

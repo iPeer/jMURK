@@ -1,9 +1,11 @@
 package iPeer.jMURK;
 
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.io.File;
 
-import java.io.*;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class ClickHandler {
 
@@ -60,13 +62,14 @@ public class ClickHandler {
 					PlayerHandler.startNewGame(charname);
 					GameTick gt = new GameTick();
 					gt.start();
+					InterfaceHandler.jMURKHub();
 				}
 				else 
 					return;
 			}
 			else if (cmd == "Load Game") {
-				LoadGameDialog l = new LoadGameDialog(f);
-				l.create();
+				jMURKLoadGame l = new jMURKLoadGame(f);
+				l.setVisible(true);
 			}
 			else
 				ErrorHandler.e(2, "ID not handled.");

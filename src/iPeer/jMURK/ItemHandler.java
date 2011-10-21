@@ -1,7 +1,9 @@
 package iPeer.jMURK;
 
-import java.io.*;
-import java.util.*;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Properties;
 
 @SuppressWarnings( {"unchecked", "static-access"} )
 public class ItemHandler {

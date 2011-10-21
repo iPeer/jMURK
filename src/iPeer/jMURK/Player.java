@@ -1,7 +1,8 @@
 package iPeer.jMURK;
 
 //import java.io.*;
-import java.util.*;
+import java.util.Hashtable;
+import java.util.Random;
 
 @SuppressWarnings({ "unchecked", "rawtypes" }) // It's mixed data, so this shuts the compiler up about warnings. Doesn't actually effect the user at all.
 public class Player {

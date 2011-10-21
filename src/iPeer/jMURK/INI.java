@@ -1,7 +1,9 @@
 package iPeer.jMURK;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Properties;
 
 public class INI {
 

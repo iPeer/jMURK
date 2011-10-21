@@ -1,11 +1,17 @@
 package iPeer.jMURK;
 
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 
 @SuppressWarnings("serial")
@@ -13,6 +19,7 @@ public class jMURKHub extends JFrame {
 
 	private JPanel contentPane;
 
+	@SuppressWarnings("static-access")
 	public jMURKHub() {
 		Utils.fixFont(new Font("Tahoma", Font.PLAIN, 11));
 		isOpen = true;
@@ -20,6 +27,7 @@ public class jMURKHub extends JFrame {
 		setTitle("jMURK Hub");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 409, 284);
+		setLocation((Utils.resolution().width - getWidth()) / 2, (Utils.resolution().height - getHeight()) / 2);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -85,7 +93,7 @@ public class jMURKHub extends JFrame {
 		btnFightNow.setBounds(10, 26, 89, 23);
 		contentPane.add(btnFightNow);
 		
-		JLabel PlayerName = new JLabel("Player Name");
+		JLabel PlayerName = new JLabel(PlayerHandler.plyr.p.get("Name").toString());
 		PlayerName.setFont(new Font("Tahoma", Font.BOLD, 11));
 		PlayerName.setHorizontalAlignment(SwingConstants.CENTER);
 		PlayerName.setBounds(202, 25, 172, 14);
@@ -106,8 +114,17 @@ public class jMURKHub extends JFrame {
 		lblStatsPlaceholder.setBounds(224, 91, 133, 87);
 		contentPane.add(lblStatsPlaceholder);
 		
+		GameTime = new JLabel("00:00");
+		GameTime.setHorizontalAlignment(SwingConstants.CENTER);
+		GameTime.setBounds(34, 97, 46, 14);
+		contentPane.add(GameTime);
+		
+	}
+	
+	public static void updatejMURKHub(String t) {
+		if (isOpen) { GameTime.setText(t); }
 	}
 	
 	public static boolean isOpen = false;
-	
+	private static JLabel GameTime;
 }

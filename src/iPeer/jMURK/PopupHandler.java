@@ -1,6 +1,6 @@
 package iPeer.jMURK;
 
-import javax.swing.*;
+import javax.swing.JWindow;
 
 public class PopupHandler {
 
