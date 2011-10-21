@@ -19,6 +19,7 @@ public class jMURKStartDialog implements ActionListener {
 	}
 	
 	public void create() {
+		f.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		Dimension screen = Utils.resolution();
 		f.setLayout(null);
 		f.setSize(400,150);

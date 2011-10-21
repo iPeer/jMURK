@@ -72,6 +72,5 @@ public class ItemHandler {
 	public static List<String> Pendants = Arrays.asList("Test Pendant", "Golden Pendant");
 	public static List<String> Shields = Arrays.asList("Test Shield");
 	public static List<String> Misc = Arrays.asList("Test Misc");
-	public enum itemTypes {armour, weapon, aid, pendant, shield, misc};
 	private static PlayerHandler pl;
 }

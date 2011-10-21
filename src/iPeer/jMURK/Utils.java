@@ -1,7 +1,12 @@
 package iPeer.jMURK;
 
 import java.awt.*;
+import java.util.*;
 
+import javax.swing.*;
+import javax.swing.plaf.*;
+
+@SuppressWarnings("rawtypes")
 public class Utils {
 
 	public Utils() { }
@@ -27,8 +32,23 @@ public class Utils {
 			str = str.substring(0, str.length() - 1);
 		}
 		// Final cleanup
-			String s2 = str.replaceAll(",,", ",");
-			return s2;
+		String s2 = str.replaceAll(",,", ",");
+		return s2;
+	}
+
+	public static void fixFont(Font fnt) {
+		FontUIResource f = new FontUIResource(fnt);
+		Enumeration keys = UIManager.getDefaults().keys();
+		while (keys.hasMoreElements()) {
+			Object key = keys.nextElement();
+			Object value = UIManager.get(key);
+			if (value instanceof FontUIResource) {
+				//FontUIResource orig = (FontUIResource) value;
+				Font font = new Font(f.getFontName(), f.getStyle(), f.getSize());
+				UIManager.put(key, new FontUIResource(font));
+			}
+		}
+
 	}
 
 }

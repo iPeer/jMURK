@@ -8,7 +8,7 @@ public class InterfaceHandler {
 	// Depreciated
 	public static void jMURKHub() {
 		jMURKHub m = new jMURKHub();
-		m.create();
+		m.setVisible(true);
 		//jMURKHub.create();
 	}
 	public static void jMURKTestDialog(JFrame parent) {

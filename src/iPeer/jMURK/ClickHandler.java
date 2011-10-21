@@ -48,10 +48,12 @@ public class ClickHandler {
 
 		}
 		else if (win == "jMURKStartDialog")
-			if (cmd == "Quit jMURK")
-				ExitHandler.closeJFrame(f);
+			if (cmd == "Quit jMURK") {
 				if (Engine.isGameLoaded())
 					PlayerHandler.unloadGame(); // DEBUG: The game has no "real" quit button yet, so this acts as it for now.
+				ExitHandler.closeJFrame(f);
+				System.exit(0);
+			}
 			else if (cmd == "New Game") {
 				String charname = JOptionPane.showInputDialog(f,"Enter your character's name:",null,1);
 				if (charname != null) {
@@ -69,7 +71,7 @@ public class ClickHandler {
 			else
 				ErrorHandler.e(2, "ID not handled.");
 	}
-	
+
 	public static PlayerHandler pl = new PlayerHandler();
-	
+
 }
