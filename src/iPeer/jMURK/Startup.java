@@ -5,6 +5,7 @@ import java.io.File;
 public class Startup {
 	
 	public Startup() {
+		
 	}
 	
 	public static void main(String[] args) {
@@ -12,10 +13,11 @@ public class Startup {
 		try {
 			jMURKStartDialog m = new jMURKStartDialog();
 			m.create();
-			//InterfaceHandler.jMURKHub();
-			PlayerHandler ph = new PlayerHandler();
-			ph.load(new File("saves/iPeer/save.msf"));
+			PlayerHandler hi = new PlayerHandler();
+			hi.load(new File("saves/iPeer/save.msf"));
 			System.out.println("InterfaceHandler started");
+			Engine.loadMonsterFiles();
+			CombatHandler.combatInit();
 		}
 		catch (Exception e) {
 			ErrorHandler.e(1,"Unable to start InterfaceHandler: "+e);

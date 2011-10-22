@@ -1,0 +1,7 @@
+name=Test Monster
+HP=100000
+weapon=Wooden Sword
+minDam=0
+maxDam=0
+AP=0
+CC=0

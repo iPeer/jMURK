@@ -211,6 +211,16 @@ public class PlayerHandler {
 		return false;
 	}
 	
+	public static String[] getPlayerArmour() {
+		String playerArmourHead, playerArmourBody, playerArmourLegs, playerArmourShield;
+		playerArmourHead = plyr.p.get("armourHead").toString();
+		playerArmourBody = plyr.p.get("armourTorso").toString();
+		playerArmourLegs = plyr.p.get("armourLegs").toString();
+		playerArmourShield = plyr.p.get("armourShield").toString();
+		String[] armour = {playerArmourHead, playerArmourBody, playerArmourLegs, playerArmourShield};
+		return armour;
+	}
+	
 	public static Player plyr;
 	public static String tempSaveName;
 	private static Properties chk = new Properties();

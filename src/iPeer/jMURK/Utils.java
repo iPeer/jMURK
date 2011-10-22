@@ -101,4 +101,10 @@ public class Utils {
 		return m2+":"+s2;
 	}
 
+	public static String getPathToJar() {
+		try { String ptj = Utils.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath(); return ptj.substring(1, ptj.length()); }
+		catch (Exception e) { ErrorHandler.e(1, "Unable to get path for this jar file."); }
+		return null; 
+	}
+
 }

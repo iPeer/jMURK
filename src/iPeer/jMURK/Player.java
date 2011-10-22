@@ -16,9 +16,10 @@ public class Player {
 		p.put("EXP", Integer.toString(0));
 		p.put("LVL", Integer.toString(0));
 		p.put("Inventory", inventory);
-		p.put("ArmourHead", "Leather Cap");
-		p.put("ArmourTorso", "Leather Tunic");
-		p.put("ArmourLegs", "Leather Slacks");
+		p.put("armourHead", "Leather Cap");
+		p.put("armourTorso", "Leather Tunic");
+		p.put("armourLegs", "Leather Slacks");
+		p.put("armourShield", "Wooden Shield");
 		p.put("Weapon", "Wooden Sword");
 		p.put("AP", Integer.toString(0));
 		p.put("CC", Integer.toString(0));

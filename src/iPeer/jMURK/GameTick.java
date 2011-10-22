@@ -32,6 +32,7 @@ public class GameTick {
 		}
 	};
 
+	@SuppressWarnings({ "unchecked", "static-access" })
 	public static void tick() {
 		if (tickTime == 1439)
 			tickTime = -1;

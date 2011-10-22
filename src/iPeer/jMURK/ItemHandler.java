@@ -57,6 +57,7 @@ public class ItemHandler {
 			pl.plyr.p.put("Weapon", "Hands");
 		}
 		else if (itemType == "armour") {
+			//TODO: Finish coding
 			Properties d = new Properties();
 			d = getItemDataFromDat(item);
 			int playerHP = Engine.getPlayerHP(), playerCHP = Engine.getPlayerCHP(), playerAP = Engine.getPlayerAP(), playerCC = Engine.getPlayerCC(); 
@@ -72,7 +73,7 @@ public class ItemHandler {
 	public static List<String> Weapons = Arrays.asList("Test Weapon", "Wooden Sword");
 	public static List<String> Aid = Arrays.asList("Test Aid", "Baul");
 	public static List<String> Pendants = Arrays.asList("Test Pendant", "Golden Pendant");
-	public static List<String> Shields = Arrays.asList("Test Shield");
+	public static List<String> Shields = Arrays.asList("Test Shield", "Wooden Shield");
 	public static List<String> Misc = Arrays.asList("Test Misc");
 	private static PlayerHandler pl;
 }

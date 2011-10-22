@@ -10,17 +10,15 @@ public class ErrorHandler {
 	}
 	
 	public static void e(int code, String text) {
-		//Depreciated 
-		if (code == 0) {
-			System.out.println(s+" Hello! If you're seeing this, then the error handler loaded successfully! "+text);
-		}
 		if (code == 1) {
-			System.out.println(s+" FATAL - "+text);
+			System.out.println("FATAL - "+text);
 		}
 		if (code == 2) {
-			System.out.println(s+" SEVERE - "+text);
+			System.out.println("SEVERE - "+text);
+		}
+		if (code == 3) {
+			System.out.println("FILE I/O - "+text);
 		}
 			
 	}
-	public static String s = "ErrorHandler:";
 }
