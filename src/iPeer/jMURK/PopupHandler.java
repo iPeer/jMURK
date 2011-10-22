@@ -8,6 +8,7 @@ public class PopupHandler {
 	
 	public void displaySmallNotification(String text) {
 		JWindow p = new JWindow();
+		//TODO: CODE!
 	}
 	
 }

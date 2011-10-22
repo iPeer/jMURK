@@ -3,15 +3,17 @@ package iPeer.jMURK;
 import java.io.InputStream;
 import java.util.*;
 
+import iPeer.jMURK.monster.*;
+import iPeer.jMURK.item.*;
+
 public class CombatHandler {
 
 	public CombatHandler() { }
 
 	public static void combatInit() {
 		Random r = new Random();
-		int m = 1; // debug
+		int m = 1; //DEBUG
 		//int m = r.nextInt(monsters.size()) + 1;
-		System.out.println(m);
 		Properties monster = new Properties();
 		try {
 			InputStream is = CombatHandler.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/monster/"+Integer.toString(m)+".dat");
@@ -33,11 +35,10 @@ public class CombatHandler {
 		monsterCC = Integer.parseInt(monster.get("CC").toString());
 		monsterMinHit = Integer.parseInt(monster.get("minDam").toString());
 		monsterMaxHit = Integer.parseInt(monster.get("maxDam").toString());
-		monsterName = monster.getProperty("Name").toString();
+		monsterName = monster.getProperty("name").toString();
 		monsterWeapon = monster.get("weapon").toString();
 		
-		combatTurn = r.nextInt(1) + 1;
-		System.out.println(combatTurn);
+		combatTurn = r.nextInt(2) + 1;
 	}
 	public static int playerHP, playerCC, playerAP, playerCHP, monsterHP, monsterCHP, monsterAP, 
 	monsterCC, monsterMinHit, monsterMaxHit, combatTurn;

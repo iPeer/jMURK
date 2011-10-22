@@ -1,9 +1,12 @@
 package iPeer.jMURK;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+
+import iPeer.jMURK.item.*;
 
 @SuppressWarnings( {"unchecked", "static-access"} )
 public class ItemHandler {
@@ -36,6 +39,24 @@ public class ItemHandler {
 		try { i.load(is); }
 		catch (Exception e) { ErrorHandler.e(1, "Unable to load item file"); }
 		return i;
+	}
+	
+	public static boolean doesItemHaveHP(String item) {
+		InputStream is = ItemHandler.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/item/"+item+".dat");
+		Properties i = new Properties();
+		try {
+			i.load(is);
+			@SuppressWarnings("unused")
+			int ihp = Integer.parseInt(i.get("itemHP").toString());
+			return true;
+		}
+		catch (NullPointerException e) {
+			return false;
+		}
+		catch (IOException e) {
+			ErrorHandler.e(3,"Unable to load Item information");
+		}
+		return false;
 	}
 
 	public static Object getOtherItemValue(String item, String value) {
