@@ -15,8 +15,8 @@ public class Startup {
 			PlayerHandler hi = new PlayerHandler();
 			hi.load(new File("saves/iPeer/save.msf"));
 			System.out.println("InterfaceHandler started");
-			Engine.loadMonsterFiles();
-			CombatHandler.combatInit();
+			/*Engine.loadMonsterFiles();
+			CombatHandler.combatInit();*/
 		}
 		catch (Exception e) {
 			ErrorHandler.e(1,"Unable to start InterfaceHandler: "+e);

@@ -1,11 +1,11 @@
 package iPeer.jMURK;
 
+import iPeer.jMURK.item.ItemWeapon;
+
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.security.CodeSource;
-import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -63,18 +63,19 @@ public class Engine {
 	}
 
 	public static int[] getWeaponDam(String weapon) {
-		InputStream is = Engine.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/item/"+weapon+".dat");	
-		Properties p = new Properties();
-		try { p.load(is); is.close(); }
-		catch (Exception e) { ErrorHandler.e(1,"Unable to read resource."); }
-		int dam1 = Integer.parseInt(p.get("minDam").toString());
-		int dam2 = Integer.parseInt(p.get("maxDam").toString());
-		int[] damOut = {dam1, dam2};
-		return damOut; // 0 = min, 1 = max
+		try {
+			ItemWeapon i = (ItemWeapon)Class.forName("iPeer.jMURK.item."+weapon.replaceAll(" ","")).newInstance();
+			int[] dam = {i.minDam, i.maxDam};
+			return dam; // 0 = min, 1 = max
+		} catch (Exception e) {
+			ErrorHandler.e(1, "Unable to create class for weapon");
+			e.printStackTrace();
+		}
+		return null; // Hopefully, it never gets here...
 	}
 
-	public static void loadMonsterFiles() throws IOException {
-
+	public static void loadMonsterFiles() throws IOException { //Deprecated
+		
 		if (Utils.getPathToJar().endsWith(".jar")) {
 
 			CodeSource s = Engine.class.getProtectionDomain().getCodeSource();

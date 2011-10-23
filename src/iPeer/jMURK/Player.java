@@ -4,7 +4,7 @@ package iPeer.jMURK;
 import java.util.Hashtable;
 import java.util.Random;
 
-@SuppressWarnings({ "unchecked", "rawtypes" }) // It's mixed data, so this shuts the compiler up about warnings. Doesn't actually effect the user at all.
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class Player {
 	public Player(String n) {
 		String inventory = "Baul|5,Wooden Sword|1,Leather Slacks|1,Leather Tunic|1,Leather Cap|1,Golden Pendant|1";
