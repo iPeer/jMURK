@@ -8,12 +8,19 @@ public class Monster {
 		CHP = HP;
 		AP = 0;
 		CC = 0;
-		Weapon = "";
+		weapon = "";
 		isDead = false;
+		minDam = 0;
+		maxDam = 0;
+	}
+	
+	public void updateIsDead() {
+		if (HP <= 0)
+			isDead = true;
 	}
 
-	public String name, Weapon;
-	public int HP, CHP, AP, CC;
+	public String name, weapon;
+	public int HP, CHP, AP, CC, minDam, maxDam;
 	public boolean isDead;
 	
 }
