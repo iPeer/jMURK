@@ -9,7 +9,6 @@ public class Startup {
 	}
 	
 	public static void main(String[] args) {
-		ErrorHandler.l();
 		try {
 			jMURKStartDialog m = new jMURKStartDialog();
 			m.create();
