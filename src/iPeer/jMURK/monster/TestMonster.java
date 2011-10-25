@@ -5,7 +5,8 @@ public class TestMonster extends Monster {
 	public TestMonster() {
 
 		name = "Test Monster";
-		HP = 100000;
+		HP = 10;
+		exp = 2;
 		maxDam = 1;
 		weapon = "Wooden Sword";
 		

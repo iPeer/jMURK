@@ -87,7 +87,6 @@ public class ItemHandler {
 			if (itemDR > 0)
 				playerDR -= itemDR;
 		}
-
 	}
 
 	public static List<String> Armours = Arrays.asList("Test Armour", "Leather Tunic", "Leather Slacks", "Leather Cap");

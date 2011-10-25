@@ -75,7 +75,7 @@ public class Engine {
 	}
 
 	public static void loadMonsterFiles() throws IOException { //Deprecated
-		
+
 		if (Utils.getPathToJar().endsWith(".jar")) {
 
 			CodeSource s = Engine.class.getProtectionDomain().getCodeSource();
@@ -109,6 +109,25 @@ public class Engine {
 
 	public static String getPlayerWeapon() {
 		return PlayerHandler.plyr.p.get("Weapon").toString();
+	}
+
+	public static double getDifficultyMultiplier (int d) {
+		switch (d) {
+		case 1:
+			return 1.0;
+		case 2:
+			return 1.5;
+		case 3:
+			return 2.0;
+		case 4:
+			return 3.0;
+		default:
+			return 1.0;
+		}
+	}
+
+	public static int getPlayerCoins() {
+		return intValue("Coins");
 	}
 
 }

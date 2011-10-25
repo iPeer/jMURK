@@ -221,6 +221,24 @@ public class PlayerHandler {
 		return armour;
 	}
 	
+	public static int getDifficulty() {
+		/*
+		 * 
+		 * Difficulties:
+		 * 1 = easy
+		 * 2 = normal
+		 * 3 = hard
+		 * 4 = insane
+		 * 
+		 */
+		try {
+			return Integer.parseInt(plyr.p.get("Difficulty").toString());
+		}
+		catch (NullPointerException e) {
+			return 1;
+		}
+	}
+	
 	public static Player plyr;
 	public static String tempSaveName;
 	private static Properties chk = new Properties();
