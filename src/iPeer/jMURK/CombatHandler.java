@@ -28,7 +28,7 @@ public class CombatHandler {
 		playerWins = Engine.getPlayerWins();
 		playerLoses = Engine.getPlayerLoses();
 		monster = (Monster)Class.forName("iPeer.jMURK.monster."+m.replaceAll(" ","")).newInstance();
-		monster.level *= (playerLevel + (r.nextInt(10) * playerDifficultyMulti)); // Somewhat randomised monster levels while still being "around" the player's
+		monster.level *= Math.floor(playerLevel + (r.nextInt(10) * playerDifficultyMulti)); // Somewhat randomised monster levels while still being "around" the player's
 		monster.exp *= monster.level;
 		monsterName = monster.name; // Not needed... Just using it to remind me to make it update the window.
 		// TODO: Make this update combat dialog with the monster's name.
