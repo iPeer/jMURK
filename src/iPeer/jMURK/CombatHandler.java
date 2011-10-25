@@ -25,6 +25,8 @@ public class CombatHandler {
 		playerCoins = Engine.getPlayerCoins();
 		playerEXP = Engine.getPlayerEXP();
 		playerDifficultyMulti = Integer.parseInt(Double.toString(Engine.getDifficultyMultiplier(PlayerHandler.getDifficulty()))); // Yo dawg
+		playerWins = Engine.getPlayerWins();
+		playerLoses = Engine.getPlayerLoses();
 		monster = (Monster)Class.forName("iPeer.jMURK.monster."+m.replaceAll(" ","")).newInstance();
 		monster.level *= (playerLevel + (r.nextInt(10) * playerDifficultyMulti)); // Somewhat randomised monster levels while still being "around" the player's
 		monster.exp *= monster.level;
@@ -55,10 +57,8 @@ public class CombatHandler {
 	
 	private static void playerIsDead() {
 		isPlayerDead = true;
-		int playerCoins = Integer.parseInt(PlayerHandler.plyr.p.get("Coins").toString());
 		playerCoins -= (monster.exp * playerDifficultyMulti);
 		PlayerHandler.plyr.p.put("Coins", Integer.toString(playerCoins));
-		int playerLoses = Integer.parseInt(PlayerHandler.plyr.p.get("Loses").toString());
 		playerLoses += 1;
 		PlayerHandler.plyr.p.put("Loses", Integer.toString(playerLoses));
 		PlayerHandler.save(1);
@@ -83,7 +83,6 @@ public class CombatHandler {
 		monster.isDead = true;
 		playerCoins += (monster.exp * playerDifficultyMulti);
 		playerEXP += monster.exp;
-		int playerWins = Integer.parseInt(PlayerHandler.plyr.p.get("Wins").toString());
 		playerWins += 1;
 		PlayerHandler.plyr.p.put("Wins", Integer.toString(playerWins));
 		PlayerHandler.save(1);
@@ -91,7 +90,7 @@ public class CombatHandler {
 	
 	public static int playerHP, playerCC, playerAP, playerCHP, monsterHP, monsterCHP, monsterAP, 
 	monsterCC, monsterMinHit, monsterMaxHit, combatTurn, playerLevel, playerDifficultyMulti, playerCoins,
-	playerEXP;
+	playerEXP, playerWins, playerLoses;
 	public static int[] playerWeaponDamage;
 	public static String monsterName, monsterWeapon, playerWeapon;
 	public static boolean playerHasAttacked = false;

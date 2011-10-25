@@ -130,4 +130,12 @@ public class Engine {
 		return intValue("Coins");
 	}
 
+	public static int getPlayerWins() {
+		return intValue("Wins");
+	}
+	
+	public static int getPlayerLoses() {
+		return intValue("Loses");
+	}
+
 }
