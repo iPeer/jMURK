@@ -1,5 +1,6 @@
 package iPeer.jMURK;
 
+import iPeer.jMURK.err.ItemNotFoundException;
 import iPeer.jMURK.item.ItemWeapon;
 
 import java.io.File;
@@ -62,16 +63,14 @@ public class Engine {
 		return !PlayerHandler.plyr.p.isEmpty();
 	}
 
-	public static int[] getWeaponDam(String weapon) {
+	public static int[] getWeaponDam(String weapon) throws ItemNotFoundException {
 		try {
 			ItemWeapon i = (ItemWeapon)Class.forName("iPeer.jMURK.item."+weapon.replaceAll(" ","")).newInstance();
 			int[] dam = {i.minDam, i.maxDam};
 			return dam; // 0 = min, 1 = max
 		} catch (Exception e) {
-			ErrorHandler.e(1, "Unable to create class for weapon");
-			e.printStackTrace();
+			throw new ItemNotFoundException();
 		}
-		return null; // Hopefully, it never gets here...
 	}
 
 	public static void loadMonsterFiles() throws IOException { //Deprecated

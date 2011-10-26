@@ -6,6 +6,8 @@ import java.util.*;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
+import iPeer.jMURK.err.ItemNotFoundException;
+import iPeer.jMURK.err.MonsterNotFoundException;
 import iPeer.jMURK.monster.Monster;
 
 @SuppressWarnings({ "unchecked", "static-access" })
@@ -13,7 +15,7 @@ public class CombatHandler {
 	
 	public CombatHandler() { }
 
-	public static void combatInit() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public static void combatInit() throws MonsterNotFoundException, ItemNotFoundException {
 		c = new jMURKCombat();
 		Random r = new Random();
 		int i = r.nextInt(MonsterList.length);
@@ -33,7 +35,11 @@ public class CombatHandler {
 		playerDifficultyMulti = Engine.getDifficultyMultiplier(PlayerHandler.getDifficulty());
 		playerWins = Engine.getPlayerWins();
 		playerLoses = Engine.getPlayerLoses();
-		monster = (Monster)Class.forName("iPeer.jMURK.monster."+m.replaceAll(" ","")).newInstance();
+		try {
+			monster = (Monster)Class.forName("iPeer.jMURK.monster."+m.replaceAll(" ","")).newInstance();
+		} catch (Exception e) {
+			throw new MonsterNotFoundException(e.getMessage());
+		}
 		monster.level *= Math.floor(playerLevel + (r.nextInt(10) * playerDifficultyMulti)); // Somewhat randomised monster levels while still being "around" the player's
 		monster.exp *= monster.level;
 		monster.CC *= monster.level;
