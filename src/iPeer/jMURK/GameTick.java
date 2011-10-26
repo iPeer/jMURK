@@ -21,7 +21,8 @@ public class GameTick {
 	Runnable tick = new Runnable() {
 		public void run() {
 			while (Engine.isGameLoaded()) {
-				tick();
+				try { tick(); }
+				catch (Exception e) { ErrorHandler.e(1, "Unable to complete game tick!"); }
 				try { Thread.sleep(1000L); }
 				catch (Exception e) {
 					ErrorHandler.e(1, "Unable to complete game tick");
@@ -37,13 +38,21 @@ public class GameTick {
 		if (tickTime == 1439)
 			tickTime = -1;
 		tickTime++;
+		if (CombatHandler.playerIsInCombat) {
+			System.out.println(CombatHandler.playerIsInCombat + " / "+CombatHandler.combatTurn);
+			if (CombatHandler.combatTurn == "o")
+				CombatHandler.monsterAttack();
+			if (CombatHandler.combatTurn == "p" && Engine.useAutoAttack())
+				CombatHandler.playerAttack();
+		}
+			
 		PlayerHandler.plyr.p.put("Time", Integer.toString(tickTime));
-		System.out.println(tickTime);
-		jMURKHub.updatejMURKHub(Utils.getTicksAsGameTime(tickTime));
+		//System.out.println(tickTime);
+		jMURKHub.updatejMURKHub(Engine.getTimeOfDayFromTicks(tickTime)+", "+Utils.getTicksAsGameTime(tickTime));
 
 	}
 
-	static int tickTime;
+	static int tickTime = 0;
 
 
 }

@@ -93,18 +93,29 @@ public class Utils {
 	}
 	
 	public static String getTicksAsGameTime(int t) {
-		int min = 0, sec = 0;
-		min = t/60;
-		sec = t%60;
-		String s2 = sec < 10 ? "0"+Integer.toString(sec) : Integer.toString(sec);
-		String m2 = min < 10 ? "0"+Integer.toString(min) : Integer.toString(min);
-		return m2+":"+s2;
+		try {
+			int min = 0, sec = 0;
+			min = t/60;
+			sec = t%60;
+			String s2 = sec < 10 ? "0"+Integer.toString(sec) : Integer.toString(sec);
+			String m2 = min < 10 ? "0"+Integer.toString(min) : Integer.toString(min);
+			return m2+":"+s2;
+		}
+		catch (NullPointerException e) {
+			return "00:00";
+		}
 	}
 
 	public static String getPathToJar() {
 		try { String ptj = Utils.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath(); return ptj.substring(1, ptj.length()); }
 		catch (Exception e) { ErrorHandler.e(1, "Unable to get path for this jar file."); }
 		return null; 
+	}
+
+	public static boolean isBetween(int i, int j, int k) {
+		if (i >= j && i <= k)
+			return true;
+		return false;
 	}
 
 }

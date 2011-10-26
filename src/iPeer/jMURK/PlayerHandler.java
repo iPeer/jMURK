@@ -81,7 +81,10 @@ public class PlayerHandler {
 			try {
 				l.load(new FileInputStream(f));
 				plyr.p.putAll(l);
+				//l.putAll(plyr.p);
 				GameTick.tickTime = Integer.parseInt(plyr.p.get("Time").toString());
+				GameTick gt = new GameTick();
+				gt.start();
 				System.out.println("Player: Loaded save game successfully.");
 			}
 			catch (Exception e) {
@@ -107,9 +110,9 @@ public class PlayerHandler {
 		int h = Engine.getPlayerHP();
 		int ccu = Engine.getPlayerCritIncreaseChance(); // TODO: Actually code this...
 		for (; e >= getEXPAtLevel(l + 1); l++) {
-			if (r.nextInt(100)  <= ccu)
+			System.out.println("PLayer is now level "+l);
+			if (r.nextInt(100) <= ccu)
 				c++;
-			l++;
 			h++;
 		}
 		plyr.p.put("HP", Integer.toString(h));

@@ -48,8 +48,9 @@ public class jMURKLoadGame extends JDialog {
 				PlayerHandler pl = new PlayerHandler();
 				setVisible(false);
 				jMURKStartDialog.hide();
-				InterfaceHandler.jMURKHub();
 				pl.load(f);
+				InterfaceHandler.jMURKHub();
+				jMURKHub.updatejMURKHub(Engine.getTimeOfDayFromTicks(GameTick.tickTime)+", "+Utils.getTicksAsGameTime(GameTick.tickTime));
 			}
 		});
 		btnLoadGame.setToolTipText("Load the selected save file.");

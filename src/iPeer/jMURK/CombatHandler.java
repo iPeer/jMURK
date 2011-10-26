@@ -3,13 +3,18 @@ package iPeer.jMURK;
 
 import java.util.*;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+
 import iPeer.jMURK.monster.Monster;
+
 @SuppressWarnings({ "unchecked", "static-access" })
 public class CombatHandler {
 	
 	public CombatHandler() { }
 
 	public static void combatInit() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+		c = new jMURKCombat();
 		Random r = new Random();
 		int i = r.nextInt(MonsterList.length);
 		i = -1; // DEBUG
@@ -24,20 +29,42 @@ public class CombatHandler {
 		playerLevel = Engine.getPlayerLevel();
 		playerCoins = Engine.getPlayerCoins();
 		playerEXP = Engine.getPlayerEXP();
-		playerDifficultyMulti = Integer.parseInt(Double.toString(Engine.getDifficultyMultiplier(PlayerHandler.getDifficulty()))); // Yo dawg
+		//playerDifficultyMulti = Integer.parseInt(Double.toString(Engine.getDifficultyMultiplier(PlayerHandler.getDifficulty()))); // Yo dawg
+		playerDifficultyMulti = Engine.getDifficultyMultiplier(PlayerHandler.getDifficulty());
 		playerWins = Engine.getPlayerWins();
 		playerLoses = Engine.getPlayerLoses();
 		monster = (Monster)Class.forName("iPeer.jMURK.monster."+m.replaceAll(" ","")).newInstance();
 		monster.level *= Math.floor(playerLevel + (r.nextInt(10) * playerDifficultyMulti)); // Somewhat randomised monster levels while still being "around" the player's
 		monster.exp *= monster.level;
-		monsterName = monster.name; // Not needed... Just using it to remind me to make it update the window.
-		// TODO: Make this update combat dialog with the monster's name.
-		combatTurn = r.nextInt(2) + 1;
-		if (combatTurn == 2)
+		monster.CC *= monster.level;
+		monster.AP *= monster.level;
+		monster.CHP = monster.HP;
+		combatTurn = r.nextInt(1) == 1 ? "o" : "p";
+		if (combatTurn == "o")
 			playerHasAttacked = true;
+		playerIsInCombat = true;
+		c.Playername.setText(Engine.getPlayerName());
+		c.Hp.setText("HP: "+Integer.toString(playerCHP)+"/"+Integer.toString(playerHP));
+		c.Ap.setText("AP: "+Integer.toString(playerAP));
+		c.Cc.setText("CC: "+Integer.toString(playerCC));
+		c.Lvl.setText("LVL: "+Integer.toString(playerLevel));
+		
+		c.MonsterName.setText(monster.name);
+		c.MonsterLVL.setText("LVL: "+Integer.toString(monster.level));
+		c.MonsterAP.setText("AP: "+Integer.toString(monster.AP));
+		c.MonsterCC.setText("CC: "+Integer.toString(monster.CC));
+		c.MonsterHP.setText("HP: "+Integer.toString(monster.CHP)+"/"+Integer.toString(monster.HP));
+		
+		c.runbutton.setText("Run ("+monster.exp+" coins)");
+		c.AutoAttack.setEnabled(PlayerHandler.getDifficulty() < 2 ? true : false);
+		
+		listAidItems(c.lm, c.list);
+		c.setVisible(true);
 	}
-	
+
+
 	public static void monsterAttack() {
+		System.out.println("Monster is attacking");
 		//set initial damage with difficulty multiplier
 		Random d = new Random();
 		int dam = d.nextInt(monster.maxDam) + monster.minDam;
@@ -53,16 +80,21 @@ public class CombatHandler {
 		// Check if the player is dead.
 		if (playerCHP <= 0)
 			playerIsDead();
+		c.Hp.setText("HP: "+Integer.toString(playerCHP < 0 ? 0 : playerCHP)+"/"+Integer.toString(playerHP));
+		combatTurn = "p";
+		c.Fight.setEnabled(true);
+		c.lm2.add(c.list_1.getModel().getSize(), dam > 0 ? "Opponent hits "+dam : "Opponent misses!");
 	}
 	
 	private static void playerIsDead() {
+		playerIsInCombat = false;
 		isPlayerDead = true;
 		playerCoins -= (monster.exp * playerDifficultyMulti);
 		PlayerHandler.plyr.p.put("Coins", Integer.toString(playerCoins));
 		playerLoses += 1;
 		PlayerHandler.plyr.p.put("Loses", Integer.toString(playerLoses));
 		PlayerHandler.save(1);
-		//TODO: Add dialog related stuff.
+		//c.dispose();
 	}
 	
 	public static void playerAttack() {
@@ -76,28 +108,59 @@ public class CombatHandler {
 		monster.CHP -= dam;
 		// Check if the monster is dead
 		if (monster.CHP <= 0)
-			monsterIsDead();	
+			monsterIsDead();
+		combatTurn = "o";
+		c.Fight.setEnabled(false);
+		c.MonsterHP.setText("HP: "+Integer.toString(monster.CHP < 0 ? 0 : monster.CHP)+"/"+Integer.toString(monster.HP));
+		c.lm2.add(c.list_1.getModel().getSize(), dam > 0 ? "Player hits "+dam : "Player misses!");
 	}
 	
 	public static void monsterIsDead() {
 		monster.isDead = true;
+		playerIsInCombat = false;
 		playerCoins += (monster.exp * playerDifficultyMulti);
 		playerEXP += monster.exp;
 		playerWins += 1;
 		PlayerHandler.plyr.p.put("Wins", Integer.toString(playerWins));
 		PlayerHandler.save(1);
+		//c.dispose();
+	}
+	
+	public static void playerRun() {
+		playerIsInCombat = false;
+		monster.isDead = true;
+		playerCoins -= (monster.exp * playerDifficultyMulti);
+		playerLoses += 1;
+		PlayerHandler.plyr.p.put("Coins", Integer.toString(playerCoins));
+		PlayerHandler.plyr.p.put("Loses", Integer.toString(playerLoses));
+		PlayerHandler.save(1);
+	}
+	
+	private static void listAidItems(DefaultListModel lm, JList l) {
+		String in = Engine.getPlayerInventory();
+		String[] i = in.split(",");
+		for (int x = 0; x < i.length; x++) {
+			String a = i[x];
+			String[] b = a.split("\\|");
+			if (ItemHandler.getItemTypeFromList(b[0]) == "aid") {
+				String d = b[0]+" ("+b[1]+")";
+				int p = l.getModel().getSize();
+				lm.add(p, d);
+			}
+		}
 	}
 	
 	public static int playerHP, playerCC, playerAP, playerCHP, monsterHP, monsterCHP, monsterAP, 
-	monsterCC, monsterMinHit, monsterMaxHit, combatTurn, playerLevel, playerDifficultyMulti, playerCoins,
+	monsterCC, monsterMinHit, monsterMaxHit, playerLevel, playerCoins,
 	playerEXP, playerWins, playerLoses;
+	public static double playerDifficultyMulti;
 	public static int[] playerWeaponDamage;
-	public static String monsterName, monsterWeapon, playerWeapon;
-	public static boolean playerHasAttacked = false;
-	public static boolean isPlayerDead = false;
+	public static String monsterName, monsterWeapon, playerWeapon, combatTurn;
+	public static boolean playerHasAttacked = false, isPlayerDead = false, playerIsInCombat = false;
 	public String[] playerArmour = PlayerHandler.getPlayerArmour(); // 0 = head, 1 = body, 2 = legs, 3 = shield
 	private static Monster monster;
 	public static List<String> monsters = new ArrayList<String>();
-	private static String[] MonsterList = {"Test Monster", "Another Test Monster"};
-	
+	private static String[] MonsterList = {"Test Monster"};
+	private static String[] BossList = {"Test Boss"};
+	public static jMURKCombat c;
 }

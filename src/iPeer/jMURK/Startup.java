@@ -8,6 +8,8 @@ public class Startup {
 	
 	public static void main(String[] args) {
 		try {
+			double i = 1.0;
+			System.out.println(i * 2);
 			jMURKStartDialog m = new jMURKStartDialog();
 			m.create();
 			System.out.println("InterfaceHandler started");

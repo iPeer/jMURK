@@ -138,4 +138,31 @@ public class Engine {
 		return intValue("Loses");
 	}
 
+	public static boolean useAutoAttack() {
+		try {
+			return (intValue("AutoAttack") == 1 && PlayerHandler.getDifficulty() < 2 ? true : false);			
+		}
+		catch (NullPointerException e) {
+			return false;
+		}
+	}
+
+	public static String getPlayerName() {
+		try {
+			return PlayerHandler.plyr.p.get("Name").toString();
+		}
+		catch (NullPointerException e) {
+			return "None";
+		}
+	}
+	
+	public static String getTimeOfDayFromTicks(int t) {
+		if (Utils.isBetween(t,0,719))
+			return "Morning";
+		else if (Utils.isBetween(t,720,1079))
+			return "Afternoon";
+		else
+			return "Night";
+	}
+
 }

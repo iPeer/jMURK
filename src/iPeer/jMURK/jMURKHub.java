@@ -19,7 +19,6 @@ public class jMURKHub extends JFrame {
 
 	private JPanel contentPane;
 
-	@SuppressWarnings("static-access")
 	public jMURKHub() {
 		Utils.fixFont(new Font("Tahoma", Font.PLAIN, 11));
 		isOpen = true;
@@ -86,14 +85,19 @@ public class jMURKHub extends JFrame {
 		JButton btnFightNow = new JButton("Fight Now");
 		btnFightNow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					CombatHandler.combatInit();
+				} catch (Exception e) {
+					ErrorHandler.e(1, "Unable to initiate combat!");
+					e.printStackTrace();
+				} 
 			}
 		});
-		btnFightNow.setEnabled(false);
 		btnFightNow.setToolTipText("Get right down to business, fighting with monsters.");
 		btnFightNow.setBounds(10, 26, 89, 23);
 		contentPane.add(btnFightNow);
 		
-		JLabel PlayerName = new JLabel(PlayerHandler.plyr.p.get("Name").toString());
+		JLabel PlayerName = new JLabel(Engine.getPlayerName());
 		PlayerName.setFont(new Font("Tahoma", Font.BOLD, 11));
 		PlayerName.setHorizontalAlignment(SwingConstants.CENTER);
 		PlayerName.setBounds(202, 25, 172, 14);
@@ -114,9 +118,9 @@ public class jMURKHub extends JFrame {
 		lblStatsPlaceholder.setBounds(224, 91, 133, 87);
 		contentPane.add(lblStatsPlaceholder);
 		
-		GameTime = new JLabel("00:00");
+		GameTime = new JLabel();
 		GameTime.setHorizontalAlignment(SwingConstants.CENTER);
-		GameTime.setBounds(34, 97, 46, 14);
+		GameTime.setBounds(10, 97, 89, 14);
 		contentPane.add(GameTime);
 		
 	}

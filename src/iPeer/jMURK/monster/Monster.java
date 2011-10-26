@@ -5,7 +5,7 @@ public class Monster {
 	public Monster() {
 		name = "";
 		HP = 1; // Per monster level
-		CHP = HP;
+		CHP = 0;
 		AP = 0; // Per monster level
 		CC = 0; // Per monster level
 		weapon = "";

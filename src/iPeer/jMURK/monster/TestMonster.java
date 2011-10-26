@@ -6,8 +6,8 @@ public class TestMonster extends Monster {
 
 		name = "Test Monster";
 		HP = 10;
-		exp = 2;
-		maxDam = 1;
+		exp = 100;
+		maxDam = 10;
 		weapon = "Wooden Sword";
 		
 	}

@@ -13,8 +13,8 @@ public class Player {
 		p.put("Time", Integer.toString(Time));
 		p.put("HP", Integer.toString(100));
 		p.put("CHP", Integer.toString(100));
-		p.put("EXP", Integer.toString(0));
-		p.put("LVL", Integer.toString(0));
+		p.put("EXP", Integer.toString(60));
+		p.put("LVL", Integer.toString(1));
 		p.put("Inventory", inventory);
 		p.put("armourHead", "Leather Cap");
 		p.put("armourTorso", "Leather Tunic");
