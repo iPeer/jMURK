@@ -203,7 +203,8 @@ public class PlayerHandler {
 				if (playerCHP > playerHP && !a.overheals)
 					playerCHP = playerHP;
 				System.out.println("Final HP: "+playerCHP);
-				CombatHandler.playerCHP = playerCHP;
+				if (CombatHandler.playerIsInCombat)
+					CombatHandler.playerCHP = playerCHP;
 				plyr.p.put("CHP", Integer.toString(playerCHP));
 				removeItem(aid, aidQuant);
 			}
