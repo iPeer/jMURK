@@ -1,5 +1,7 @@
 package iPeer.jMURK;
 
+import iPeer.jMURK.err.ItemNotFoundException;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 
@@ -17,6 +19,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JCheckBox;
 
@@ -115,6 +119,27 @@ public class jMURKCombat extends JDialog {
 		
 		lm = new DefaultListModel();
 		list = new JList(lm);
+		list.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent m) {
+				JList l = (JList)m.getSource();
+				if (m.getClickCount() == 2 && CombatHandler.playerCHP < CombatHandler.playerHP) {
+					String[] i = l.getSelectedValue().toString().split("\\(");
+					System.out.println(i[0]+i[1]);
+					int q = Integer.parseInt(i[1].substring(0, i[1].length() - 1));
+					String n = i[0].substring(0, i[0].length() - 1);
+					if (q > 0)
+						try {
+							PlayerHandler.useAid(n, 1);
+							CombatHandler.playerCHP = Engine.getPlayerCHP();
+							Hp.setText("HP: "+Integer.toString(CombatHandler.playerCHP)+"/"+Integer.toString(CombatHandler.playerHP));
+							lm.clear();
+							CombatHandler.listAidItems(lm, list);
+						} catch (ItemNotFoundException e) {
+							e.printStackTrace();
+						}
+				}
+			}
+		});
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setBounds(85, 36, 175, 116);
 		d.add(list);
@@ -144,6 +169,7 @@ public class jMURKCombat extends JDialog {
 		runbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				CombatHandler.playerRun();
+				dispose();
 			}
 		});
 		runbutton.setToolTipText("Run from the battle");

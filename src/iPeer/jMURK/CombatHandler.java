@@ -142,7 +142,7 @@ public class CombatHandler {
 		PlayerHandler.save(1);
 	}
 	
-	private static void listAidItems(DefaultListModel lm, JList l) {
+	public static void listAidItems(DefaultListModel lm, JList l) {
 		String in = Engine.getPlayerInventory();
 		String[] i = in.split(",");
 		for (int x = 0; x < i.length; x++) {
