@@ -99,14 +99,14 @@ public class PlayerHandler {
 
 	}
 	
-	public void addEXP(Player plyr, int exp) {
+	public static void addEXP(int exp) {
 		int XP = Engine.getPlayerEXP();
 		int newEXP = exp + XP;
 		plyr.p.put("EXP", Integer.toString(newEXP));
 		doPlayerLevelUp();		
 	}
 	
-	public void doPlayerLevelUp() {
+	public static void doPlayerLevelUp() {
 		Random r = new Random();
 		int e = Engine.getPlayerEXP();
 		int l = Engine.getPlayerLevel();

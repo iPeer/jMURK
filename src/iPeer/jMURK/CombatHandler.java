@@ -100,7 +100,7 @@ public class CombatHandler {
 		playerLoses += 1;
 		PlayerHandler.plyr.p.put("Loses", Integer.toString(playerLoses));
 		PlayerHandler.save(1);
-		//c.dispose();
+		c.dispose();
 	}
 	
 	public static void playerAttack() {
@@ -125,11 +125,11 @@ public class CombatHandler {
 		monster.isDead = true;
 		playerIsInCombat = false;
 		playerCoins += (monster.exp * playerDifficultyMulti);
-		playerEXP += monster.exp;
+		PlayerHandler.addEXP(monster.exp);
 		playerWins += 1;
 		PlayerHandler.plyr.p.put("Wins", Integer.toString(playerWins));
 		PlayerHandler.save(1);
-		//c.dispose();
+		c.dispose();
 	}
 	
 	public static void playerRun() {
