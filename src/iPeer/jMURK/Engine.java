@@ -48,7 +48,7 @@ public class Engine {
 	}
 
 	public static int getPlayerAP() {
-		return intValue("CC");
+		return intValue("AP");
 	}
 
 	public static int getPlayerDR() {
@@ -152,6 +152,24 @@ public class Engine {
 		}
 		catch (NullPointerException e) {
 			return "None";
+		}
+	}
+	
+	public static String getTicksAsGameTime(int t) {
+		try {
+			String m2 = "00";
+			int min = 0, sec = 0;
+			min = t/60;
+			sec = t%60;
+			if (Settings.getBooleanSetting("12hrclock") && min > 12)
+				m2 = min < 10 ? "0"+Integer.toString(min) : Integer.toString(min - 12);
+			else
+				m2 = min < 10 ? "0"+Integer.toString(min) : Integer.toString(min);
+			String s2 = sec < 10 ? "0"+Integer.toString(sec) : Integer.toString(sec);
+			return m2+":"+s2;
+		}
+		catch (NullPointerException e) {
+			return "00:00";
 		}
 	}
 	

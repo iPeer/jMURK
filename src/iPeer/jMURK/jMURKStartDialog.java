@@ -55,11 +55,6 @@ public class jMURKStartDialog implements ActionListener {
 			System.exit(0);
 		}
 		});
-		/*int dialogpos = f.getX();
-		while ((screen.width - f.getWidth()) / 2 + dialogpos >= 0) {
-			f.setLocation(dialogpos, (screen.height - f.getHeight()) / 2);
-			dialogpos -=10;
-		}*/
 	}
 	
 	public void actionPerformed(ActionEvent e) { 

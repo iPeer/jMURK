@@ -48,7 +48,7 @@ public class GameTick {
 			
 		PlayerHandler.plyr.p.put("Time", Integer.toString(tickTime));
 		//System.out.println(tickTime);
-		jMURKHub.updatejMURKHub(Engine.getTimeOfDayFromTicks(tickTime)+", "+Utils.getTicksAsGameTime(tickTime));
+		jMURKHub.updatejMURKHub(Engine.getTimeOfDayFromTicks(tickTime)+", "+Engine.getTicksAsGameTime(tickTime));
 
 	}
 

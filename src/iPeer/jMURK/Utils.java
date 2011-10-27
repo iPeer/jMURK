@@ -57,22 +57,24 @@ public class Utils {
 
 	}
 
-	public static void getFilesAndFolders(DefaultMutableTreeNode n, File f) {
+	public static void listSaves(DefaultMutableTreeNode n, File f) {
 		if (!f.isDirectory()) {
 			DefaultMutableTreeNode c = new DefaultMutableTreeNode(f.getName());
 			n.add(c);
 		}
 		else {
-			System.out.println(f.getName());
-			DefaultMutableTreeNode c = new DefaultMutableTreeNode(f.getName());
-			n.add(c);
+			DefaultMutableTreeNode c = n;
+			if (!f.getName().equals("saves")) {
+				c = new DefaultMutableTreeNode(f.getName());
+				n.add(c);
+			}
 			FilenameFilter fl = new FilenameFilter() {
 				public boolean accept(File file, String name) { return !file.getName().equals("hash"); }
 			};
 
 			File f2[] = f.listFiles(fl);
 			for (int i = 0; i < f2.length; i++) {
-				if (!f2[i].getName().equals("hash")) getFilesAndFolders(c, f2[i]);
+				if (!f2[i].getName().equals("hash")) listSaves(c, f2[i]);
 			}
 		}
 	}
@@ -90,20 +92,6 @@ public class Utils {
 		try { c = Long.toString(Files.getChecksum(new File(f.getAbsolutePath()), new java.util.zip.CRC32())); }
 		catch (Exception e) { ErrorHandler.e(1, "Unable to calculate CRC32."); }
 		return c;
-	}
-	
-	public static String getTicksAsGameTime(int t) {
-		try {
-			int min = 0, sec = 0;
-			min = t/60;
-			sec = t%60;
-			String s2 = sec < 10 ? "0"+Integer.toString(sec) : Integer.toString(sec);
-			String m2 = min < 10 ? "0"+Integer.toString(min) : Integer.toString(min);
-			return m2+":"+s2;
-		}
-		catch (NullPointerException e) {
-			return "00:00";
-		}
 	}
 
 	public static String getPathToJar() {

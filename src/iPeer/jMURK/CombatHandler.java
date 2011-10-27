@@ -15,12 +15,12 @@ public class CombatHandler {
 	
 	public CombatHandler() { }
 
-	public static void combatInit() throws MonsterNotFoundException, ItemNotFoundException {
+	public static void combatInit(int type) throws MonsterNotFoundException, ItemNotFoundException {
 		c = new jMURKCombat();
 		Random r = new Random();
-		int i = r.nextInt(MonsterList.length);
+		int i = r.nextInt(type == 1 ? MonsterList.length : BossList.length);
 		i = -1; // DEBUG
-		String m = MonsterList[i + 1];
+		String m = type == 1 ? MonsterList[i + 1] : BossList[i + 1];;
 		System.out.println(m);
 		playerHP = Engine.getPlayerHP();
 		playerCHP = Engine.getPlayerCHP();
@@ -44,7 +44,6 @@ public class CombatHandler {
 		monster.exp *= monster.level;
 		monster.CC *= monster.level;
 		monster.AP *= monster.level;
-		monster.CHP = monster.HP;
 		combatTurn = r.nextInt(1) == 1 ? "o" : "p";
 		if (combatTurn == "o")
 			playerHasAttacked = true;

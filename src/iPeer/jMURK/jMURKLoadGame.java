@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
 public class jMURKLoadGame extends JDialog {
@@ -30,8 +31,10 @@ public class jMURKLoadGame extends JDialog {
 		
 		DefaultMutableTreeNode saves;
 		saves = new DefaultMutableTreeNode("Saves", true);
-		Utils.getFilesAndFolders(saves, new File("saves\\"));
-		/*JTree */tree = new JTree(saves);
+		Utils.listSaves(saves, new File("saves\\"));
+		//Utils.gfaf(saves, (new File("saves\\")).listFiles());
+		/*JTree */
+tree = new JTree(saves);
 		tree.setBounds(10, 11, 165, 300);
 		getContentPane().add(tree);
 		
@@ -50,9 +53,12 @@ public class jMURKLoadGame extends JDialog {
 				jMURKStartDialog.hide();
 				pl.load(f);
 				InterfaceHandler.jMURKHub();
-				jMURKHub.updatejMURKHub(Engine.getTimeOfDayFromTicks(GameTick.tickTime)+", "+Utils.getTicksAsGameTime(GameTick.tickTime));
+				jMURKHub.updatejMURKHub(Engine.getTimeOfDayFromTicks(GameTick.tickTime)+", "+Engine.getTicksAsGameTime(GameTick.tickTime));
 			}
 		});
+		JScrollPane scrollPane = new JScrollPane(tree);
+		scrollPane.setBounds(10, 11, 165, 300);
+		getContentPane().add(scrollPane);
 		btnLoadGame.setToolTipText("Load the selected save file.");
 		btnLoadGame.setBounds(185, 8, 89, 23);
 		getContentPane().add(btnLoadGame);
@@ -80,5 +86,4 @@ public class jMURKLoadGame extends JDialog {
 	}
 	
 	final JTree tree;
-
 }

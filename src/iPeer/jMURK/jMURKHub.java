@@ -86,7 +86,7 @@ public class jMURKHub extends JFrame {
 		btnFightNow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					CombatHandler.combatInit();
+					CombatHandler.combatInit(1);
 				} catch (Exception e) {
 					ErrorHandler.e(1, "Unable to initiate combat!");
 					e.printStackTrace();
