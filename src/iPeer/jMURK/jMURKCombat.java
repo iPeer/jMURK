@@ -30,9 +30,6 @@ public class jMURKCombat extends JDialog {
 
 	private final JPanel d = new JPanel();
 
-	/**
-	 * Create the dialog.
-	 */
 	public jMURKCombat() {
 		Utils.fixFont(new Font("Tahoma", Font.PLAIN, 11));
 		setTitle("jMURK: FIGHT!");
