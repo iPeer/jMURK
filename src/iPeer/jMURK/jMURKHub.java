@@ -35,11 +35,10 @@ public class jMURKHub extends JFrame {
 		JButton Close = new JButton("Close");
 		Close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (JOptionPane.showConfirmDialog(contentPane, "This will only close the jMURK Hub. The game will still be running in the background. " +
-						"\nTo properly quit jMURK, please use the Quit button.", "You're about to close the jMURK Hub", JOptionPane.OK_CANCEL_OPTION) == 0) {
-					isOpen = false;
-					setVisible(false);
-				}
+				if (JOptionPane.showOptionDialog(contentPane, "Are you sure you want to quit jMURK?", "Confirm Exit", 0, 0, null, null, null) == 0 && Engine.isGameLoaded())
+				PlayerHandler.unloadGame();
+				dispose();
+				System.exit(0);
 			}
 		});
 		Close.setToolTipText("Close the jMURK Hub dialog");
@@ -59,7 +58,7 @@ public class jMURKHub extends JFrame {
 		Options.setBounds(10, 127, 89, 23);
 		contentPane.add(Options);
 		
-		JButton Quit = new JButton("Quit");
+		/*JButton Quit = new JButton("Quit");
 		Quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (JOptionPane.showOptionDialog(contentPane, "Are you sure you want to quit jMURK?", "Confirm Exit", 0, 0, null, null, null) == 0 && Engine.isGameLoaded())
@@ -70,7 +69,7 @@ public class jMURKHub extends JFrame {
 		});
 		Quit.setToolTipText("Quits jMURK after saving.");
 		Quit.setBounds(10, 195, 89, 23);
-		contentPane.add(Quit);
+		contentPane.add(Quit);*/
 		
 		JButton btnInventory = new JButton("Inventory");
 		btnInventory.addActionListener(new ActionListener() {

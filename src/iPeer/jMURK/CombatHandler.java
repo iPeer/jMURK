@@ -31,6 +31,7 @@ public class CombatHandler {
 		playerLevel = Engine.getPlayerLevel();
 		playerCoins = Engine.getPlayerCoins();
 		playerEXP = Engine.getPlayerEXP();
+		//playerDifficultyMulti = Integer.parseInt(Double.toString(Engine.getDifficultyMultiplier(PlayerHandler.getDifficulty()))); // Yo dawg
 		playerDifficultyMulti = Engine.getDifficultyMultiplier(PlayerHandler.getDifficulty());
 		playerWins = Engine.getPlayerWins();
 		playerLoses = Engine.getPlayerLoses();
@@ -43,8 +44,6 @@ public class CombatHandler {
 		monster.exp *= monster.level;
 		monster.CC *= monster.level;
 		monster.AP *= monster.level;
-		monster.HP *= monster.level;
-		monster.CHP = monster.HP;
 		combatTurn = r.nextInt(1) == 1 ? "o" : "p";
 		if (combatTurn == "o")
 			playerHasAttacked = true;
