@@ -44,6 +44,8 @@ public class CombatHandler {
 		monster.exp *= monster.level;
 		monster.CC *= monster.level;
 		monster.AP *= monster.level;
+		monster.HP *= monster.level;
+		monster.CHP = monster.HP;
 		combatTurn = r.nextInt(1) == 1 ? "o" : "p";
 		if (combatTurn == "o")
 			playerHasAttacked = true;

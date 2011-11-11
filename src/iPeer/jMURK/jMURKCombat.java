@@ -29,7 +29,6 @@ import javax.swing.JCheckBox;
 public class jMURKCombat extends JDialog {
 
 	private final JPanel d = new JPanel();
-
 	
 	public jMURKCombat() {
 		Utils.fixFont(new Font("Tahoma", Font.PLAIN, 11));
