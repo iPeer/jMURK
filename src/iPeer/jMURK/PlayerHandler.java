@@ -74,6 +74,8 @@ public class PlayerHandler {
 				Properties checksum = new Properties();
 				checksum.load(new FileInputStream(f.getParent()+"\\hash"));
 				String cs = Utils.getFileCRC32(f);
+				Debug.p(checksum.get(f.getName().replace(".msf", "")).toString());
+				Debug.p(cs);
 				if (!cs.equals(checksum.get(f.getName().replace(".msf", "")))) {
 					JOptionPane.showMessageDialog(null, "This save file appears to have been edited. Please don't do that ;)");
 					return;

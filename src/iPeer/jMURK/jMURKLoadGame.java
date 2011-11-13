@@ -42,11 +42,11 @@ tree = new JTree(saves);
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Object[] pa = tree.getSelectionPath().getPath();
-				if (tree.getSelectionPath().getPathCount() < 4) {
+				if (tree.getSelectionPath().getPathCount() < 3) {
 					JOptionPane.showMessageDialog(getContentPane(), "The File you selected is not a valid save file.", "Errorous save file selected", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				String fileString = pa[1]+"/"+pa[2]+"/"+pa[3];
+				String fileString = pa[0]+"/"+pa[1]+"/"+pa[2];
 				File f = new File(fileString);
 				PlayerHandler pl = new PlayerHandler();
 				setVisible(false);
