@@ -1,6 +1,6 @@
 package iPeer.jMURK;
 
-import iPeer.jMURK.err.ItemNotFoundException;
+import iPeer.jMURK.err.Item404;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -23,6 +23,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JCheckBox;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 @SuppressWarnings({ "unchecked", "serial", "static-access" })
 
@@ -30,7 +32,15 @@ public class jMURKCombat extends JDialog {
 
 	private final JPanel d = new JPanel();
 	
+	@SuppressWarnings("rawtypes")
 	public jMURKCombat() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				CombatHandler.playerRun();
+				Debug.p("Player X'd out of Combat, treating as run away.");
+			}
+		});
 		Utils.fixFont(new Font("Tahoma", Font.PLAIN, 11));
 		setTitle("jMURK: FIGHT!");
 		setBounds(100, 100, 450, 300);
@@ -131,7 +141,7 @@ public class jMURKCombat extends JDialog {
 							Hp.setText("HP: "+Integer.toString(CombatHandler.playerCHP)+"/"+Integer.toString(CombatHandler.playerHP));
 							lm.clear();
 							CombatHandler.listAidItems(lm, list);
-						} catch (ItemNotFoundException e) {
+						} catch (Item404 e) {
 							e.printStackTrace();
 						}
 				}
@@ -188,8 +198,10 @@ public class jMURKCombat extends JDialog {
 		d.add(AutoAttack);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public JList list, list_1;
 	public static JLabel Playername, Lvl, Ap, Cc, Hp, MonsterName, MonsterHP, MonsterCC, MonsterAP, MonsterLVL;
+	@SuppressWarnings("rawtypes")
 	public DefaultListModel lm, lm2;
 	public JButton Fight, runbutton;
 	public JCheckBox AutoAttack;

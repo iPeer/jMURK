@@ -1,8 +1,7 @@
 package iPeer.jMURK;
 
-import iPeer.jMURK.err.ItemNotFoundException;
-import iPeer.jMURK.item.ItemAid;
-import iPeer.jMURK.item.ItemWeapon;
+import iPeer.jMURK.err.Item404;
+import iPeer.jMURK.item.Item;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -192,10 +191,10 @@ public class PlayerHandler {
 		}
 	}
 
-	public static void useAid (String aid, int aidQuant) throws ItemNotFoundException {
+	public static void useAid (String aid, int aidQuant) throws Item404 {
 		if (playerHasItem(aid, aidQuant)) {
 			try {
-				ItemAid a = (ItemAid)Class.forName("iPeer.jMURK.item."+aid.replaceAll(" ","")).newInstance();
+				Item a = (Item)Class.forName("iPeer.jMURK.item."+aid.replaceAll(" ","")).newInstance();
 				int playerHP = Engine.getPlayerHP();
 				int playerCHP = Engine.getPlayerCHP();
 				playerCHP += a.HP;
@@ -209,7 +208,7 @@ public class PlayerHandler {
 				removeItem(aid, aidQuant);
 			}
 			catch (Exception e) {
-				throw new ItemNotFoundException();
+				throw new Item404();
 			}
 		}
 	}

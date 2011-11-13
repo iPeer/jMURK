@@ -58,25 +58,20 @@ public class jMURKHub extends JFrame {
 		Options.setBounds(10, 127, 89, 23);
 		contentPane.add(Options);
 		
-		/*JButton Quit = new JButton("Quit");
-		Quit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (JOptionPane.showOptionDialog(contentPane, "Are you sure you want to quit jMURK?", "Confirm Exit", 0, 0, null, null, null) == 0 && Engine.isGameLoaded())
-				PlayerHandler.unloadGame();
-				dispose();
-				System.exit(0);
-			}
-		});
-		Quit.setToolTipText("Quits jMURK after saving.");
-		Quit.setBounds(10, 195, 89, 23);
-		contentPane.add(Quit);*/
-		
 		JButton btnInventory = new JButton("Inventory");
 		btnInventory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Debug.p("Trying to open Inventory");
+					jMURKInventoryDialog i = new jMURKInventoryDialog();
+					i.setVisible(true);
+				}
+				catch (Exception e) {
+					ErrorHandler.e(1, "Unable to open player Inventory");
+					Debug.p(e);
+				}
 			}
 		});
-		btnInventory.setEnabled(false);
 		btnInventory.setToolTipText("Open your inventory.");
 		btnInventory.setBounds(10, 60, 89, 23);
 		contentPane.add(btnInventory);

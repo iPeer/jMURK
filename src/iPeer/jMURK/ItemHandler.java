@@ -1,12 +1,12 @@
 package iPeer.jMURK;
 
-import java.io.IOException;
+import iPeer.jMURK.err.Item404;
+import iPeer.jMURK.item.Item;
+
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-
-import iPeer.jMURK.item.*;
 
 @SuppressWarnings( {"unchecked", "static-access"} )
 public class ItemHandler {
@@ -23,7 +23,7 @@ public class ItemHandler {
 		return "misc";
 	}
 
-	public static String getItemTypeFromDat(String item, Boolean returnSubType) {
+	public static String getItemTypeFromDat(String item, Boolean returnSubType) { //@deprecated
 		InputStream is = ItemHandler.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/item/"+item+".dat");
 		Properties i = new Properties();
 		try { i.load(is); }
@@ -33,33 +33,23 @@ public class ItemHandler {
 		return t;
 	}
 
-	public static Properties getItemDataFromDat(String item) {
-		InputStream is = ItemHandler.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/item/"+item+".dat");
-		Properties i = new Properties();
-		try { i.load(is); }
-		catch (Exception e) { ErrorHandler.e(1, "Unable to load item file"); }
-		return i;
+	public static Item getItemData(String item) throws Item404 {
+		try {
+			Item i = (Item)Class.forName("iPeer.jMURK.item."+item.replaceAll(" ","")).newInstance();
+			return i;
+		}
+		catch (Exception e) {
+			Debug.p(e);
+			EH.e(1, "Unable to load Item information.");
+			throw new Item404();
+		}
 	}
 	
-	public static boolean doesItemHaveHP(String item) {
-		InputStream is = ItemHandler.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/item/"+item+".dat");
-		Properties i = new Properties();
-		try {
-			i.load(is);
-			@SuppressWarnings("unused")
-			int ihp = Integer.parseInt(i.get("itemHP").toString());
-			return true;
-		}
-		catch (NullPointerException e) {
-			return false;
-		}
-		catch (IOException e) {
-			ErrorHandler.e(3,"Unable to load Item information");
-		}
-		return false;
+	public static boolean doesItemHaveHP(String item) throws Item404 {
+		return getItemData(item).hasHP;
 	}
 
-	public static Object getOtherItemValue(String item, String value) {
+	public static Object getOtherItemValue(String item, String value) { // @deprecated
 		InputStream is = ItemHandler.class.getClassLoader().getResourceAsStream("iPeer/jMURK/data/item/"+item+".dat");
 		Properties i = new Properties();
 		try { i.load(is); }
@@ -68,22 +58,42 @@ public class ItemHandler {
 		catch (NullPointerException n) { return "unset"; }
 	}
 
-	public static String getOtherItemValueAsString(String item, String value) {
+	public static String getOtherItemValueAsString(String item, String value) { //@deprecated
 		return getOtherItemValue(item, value).toString();
 	}
+	
+	public static String getItemType(String i) throws Item404 {
+		try {
+			return getItemData(i).type.toLowerCase();
+		}
+		catch (NullPointerException n) {
+			Debug.p("Item doesn't have Type, returning default!");
+			return "none";
+		}
+	}
+	
+	public static String getItemSubType(String i) throws Item404 {
+		try {
+			return getItemData(i).subType.toLowerCase();
+		}
+		catch (NullPointerException n) {
+			Debug.p("Item doesn't have subType, returning default!");
+			return "none";
+		}
+	}
 
-	public static void playerUnequipItem(String item) {
+	@SuppressWarnings("unused")
+	public static void playerUnequipItem(String item) throws Item404 {
 		String itemType = getItemTypeFromList(item);
 		if (itemType == "weapon") {	
 			pl.plyr.p.put("Weapon", "Hands");
 		}
 		else if (itemType == "armour") {
 			//TODO: Finish coding
-			Properties d = new Properties();
-			d = getItemDataFromDat(item);
+			Item d = getItemData(item);
 			int playerHP = Engine.getPlayerHP(), playerCHP = Engine.getPlayerCHP(), playerAP = Engine.getPlayerAP(), playerCC = Engine.getPlayerCC(); 
 			int playerDR = Engine.getPlayerDR();
-			int itemDR = (Integer)d.get("damReduce");
+			int itemDR = (Integer)d.damReduce;
 			if (itemDR > 0)
 				playerDR -= itemDR;
 		}

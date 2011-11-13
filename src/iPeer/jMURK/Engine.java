@@ -1,7 +1,7 @@
 package iPeer.jMURK;
 
-import iPeer.jMURK.err.ItemNotFoundException;
-import iPeer.jMURK.item.ItemWeapon;
+import iPeer.jMURK.err.Item404;
+import iPeer.jMURK.item.Item;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,17 +63,17 @@ public class Engine {
 		return !PlayerHandler.plyr.p.isEmpty();
 	}
 
-	public static int[] getWeaponDam(String weapon) throws ItemNotFoundException {
+	public static int[] getWeaponDam(String weapon) throws Item404 {
 		try {
-			ItemWeapon i = (ItemWeapon)Class.forName("iPeer.jMURK.item."+weapon.replaceAll(" ","")).newInstance();
+			Item i = (Item)Class.forName("iPeer.jMURK.item."+weapon.replaceAll(" ","")).newInstance();
 			int[] dam = {i.minDam, i.maxDam};
 			return dam; // 0 = min, 1 = max
 		} catch (Exception e) {
-			throw new ItemNotFoundException();
+			throw new Item404();
 		}
 	}
 
-	public static void loadMonsterFiles() throws IOException { //Deprecated
+	public static void loadMonsterFiles() throws IOException { //@deprecated
 
 		if (Utils.getPathToJar().endsWith(".jar")) {
 

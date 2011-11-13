@@ -6,15 +6,22 @@ public class ErrorHandler {
 	}
 	
 	public static void e(int code, String text) {
-		if (code == 1) {
-			System.out.println("FATAL - "+text);
+		Debug.println(e(code)+" - "+text);		
+	}
+	public static void e(int c, Exception e) {
+		e(c, e.getMessage());
+	}
+	
+	public static String e (int i) {
+		switch (i) {
+		case 1:
+			return "FATAL";
+		case 2:
+			return "SEVERE";
+		case 3:
+			return "FILE I/O";
+		default:
+			return "Unknown";
 		}
-		if (code == 2) {
-			System.out.println("SEVERE - "+text);
-		}
-		if (code == 3) {
-			System.out.println("FILE I/O - "+text);
-		}
-			
 	}
 }

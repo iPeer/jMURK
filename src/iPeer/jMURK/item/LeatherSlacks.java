@@ -1,6 +1,6 @@
 package iPeer.jMURK.item;
 
-public class LeatherSlacks extends ItemArmour {
+public class LeatherSlacks extends Item {
 
 	public LeatherSlacks() { 
 		
@@ -8,6 +8,7 @@ public class LeatherSlacks extends ItemArmour {
 		damReduce = 2;
 		val = 20;
 		subType = "armourLegs";
+		type = "Armour";
 		
 	}
 	

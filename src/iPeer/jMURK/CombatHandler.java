@@ -6,7 +6,7 @@ import java.util.*;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
-import iPeer.jMURK.err.ItemNotFoundException;
+import iPeer.jMURK.err.Item404;
 import iPeer.jMURK.err.MonsterNotFoundException;
 import iPeer.jMURK.monster.Monster;
 
@@ -15,7 +15,7 @@ public class CombatHandler {
 	
 	public CombatHandler() { }
 
-	public static void combatInit(int type) throws MonsterNotFoundException, ItemNotFoundException {
+	public static void combatInit(int type) throws MonsterNotFoundException, Item404 {
 		c = new jMURKCombat();
 		Random r = new Random();
 		int i = r.nextInt(type == 1 ? MonsterList.length : BossList.length);
@@ -143,6 +143,7 @@ public class CombatHandler {
 		PlayerHandler.save(1);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static void listAidItems(DefaultListModel lm, JList l) {
 		String in = Engine.getPlayerInventory();
 		String[] i = in.split(",");
