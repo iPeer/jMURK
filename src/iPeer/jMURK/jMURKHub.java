@@ -35,7 +35,7 @@ public class jMURKHub extends JFrame {
 		JButton Close = new JButton("Close");
 		Close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (JOptionPane.showOptionDialog(contentPane, "Are you sure you want to quit jMURK?", "Confirm Exit", 0, 0, null, null, null) == 0 && Engine.isGameLoaded())
+				if (JOptionPane.showOptionDialog(contentPane, "Are you sure you want to quit jMURK?", "Confirm Exit", JOptionPane.YES_NO_OPTION, 0, null, null, null) == JOptionPane.YES_OPTION && Engine.isGameLoaded())
 				PlayerHandler.unloadGame();
 				dispose();
 				System.exit(0);

@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JProgressBar;
 import java.awt.GridLayout;
 
@@ -26,6 +27,8 @@ public class jMURKInventoryDialog extends JDialog {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public jMURKInventoryDialog() {
+		if (JMID == null)
+			JMID = this;
 		Utils.fixFont(new Font("Tahoma", Font.PLAIN, 11));
 		setTitle("jMURK: Player Inventory");
 		setResizable(false);
@@ -54,8 +57,8 @@ public class jMURKInventoryDialog extends JDialog {
 			JButton btnRefresh = new JButton("Refresh Inventory");
 			btnRefresh.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					// TODO: Fix NPE.
-					PlayerHandler.listInventory((new jMURKInventoryDialog()), Weapons.isSelected(), Armour.isSelected(), Aid.isSelected(), Pendant.isSelected(), Misc.isSelected());
+					lm.clear();
+					PlayerHandler.listInventory(JMID, Weapons.isSelected(), Armour.isSelected(), Aid.isSelected(), Pendant.isSelected(), Misc.isSelected());
 				}
 			});
 			panel.add(btnRefresh);
@@ -106,10 +109,10 @@ public class jMURKInventoryDialog extends JDialog {
 			Aid.setBounds(227, 106, 97, 23);
 			contentPanel.add(Aid);
 
-			JCheckBox chckbxPendant = new JCheckBox("Pendants");
-			chckbxPendant.setSelected(true);
-			chckbxPendant.setBounds(227, 132, 97, 23);
-			contentPanel.add(chckbxPendant);
+			Pendant = new JCheckBox("Pendants");
+			Pendant.setSelected(true);
+			Pendant.setBounds(227, 132, 97, 23);
+			contentPanel.add(Pendant);
 
 			Misc = new JCheckBox("Misc");
 			Misc.setSelected(true);
@@ -141,4 +144,5 @@ public class jMURKInventoryDialog extends JDialog {
 	public JList list;
 	public JProgressBar progressBar;
 	private JCheckBox Weapons, Armour, Aid, Pendant, Misc;
+	jMURKInventoryDialog JMID;
 }

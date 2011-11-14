@@ -1,5 +1,8 @@
 package iPeer.jMURK;
 
+import java.io.File;
+import java.lang.reflect.Method;
+
 public class Debug {
 
 	public static void println (int i) {
@@ -46,6 +49,20 @@ public class Debug {
 
 	public static void p(boolean b) {
 		println(b);
+	}
+
+	public static void p(Method[] m) {
+		for (int a = 0;a<m.length;a++) {
+			println(m[a]);
+		}
+	}
+
+	private static void println(Method m) {
+		System.out.println(m);
+	}
+
+	public static void p(File f) {
+		System.out.println(f);
 	}
 	
 	

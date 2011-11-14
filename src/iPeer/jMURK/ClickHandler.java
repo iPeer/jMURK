@@ -59,10 +59,30 @@ public class ClickHandler {
 			else if (cmd == "New Game") {
 				String charname = JOptionPane.showInputDialog(f,"Enter your character's name:",null,1);
 				if (charname != null) {
+					File f1 = new File("saves/"+charname+"/save.msf");
+					File f2 = new File("saves/"+charname+"/autosave.msf");
+					Debug.p(f1);
+					/*if ((f1.exists() || f2.exists() && 
+							JOptionPane.showOptionDialog(f, "A character with this save name already exists. Do you want to create a new save and overwrite the existing one?", "Save file exists!", JOptionPane.YES_NO_OPTION, 0, null, null, JOptionPane.NO_OPTION) == JOptionPane.YES_OPTION) 
+							|| !f1.exists() && !f2.exists()) {*/
+					if (f1.exists() || f2.exists()) {
+						if (JOptionPane.showOptionDialog(f, "A save file already exists for that profile name. \nDo you want to load this game?", "File exists", JOptionPane.YES_NO_OPTION, 0, null, null, null) == JOptionPane.YES_OPTION) {
+							PlayerHandler PH = new PlayerHandler();
+							if (f1.lastModified() < f2.lastModified())
+								PH.load(f2);
+							else
+								PH.load(f1);
+							f.dispose();
+							InterfaceHandler.jMURKHub();
+							JOptionPane.showMessageDialog(f, "Loaded most recent save.");
+						}
+						return;
+					}
+					f.dispose();
 					PlayerHandler.startNewGame(charname);
+					InterfaceHandler.jMURKHub();
 					GameTick gt = new GameTick();
 					gt.start();
-					InterfaceHandler.jMURKHub();
 				}
 				else 
 					return;

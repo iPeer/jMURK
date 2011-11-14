@@ -265,6 +265,7 @@ public class PlayerHandler {
 
 	@SuppressWarnings("rawtypes")
 	public static void listInventory(jMURKInventoryDialog ID, boolean b, boolean c, boolean d, boolean e, boolean f) {
+		System.out.println(ID);
 		String[] i = Engine.getPlayerInventory().split("\\,");
 		ID.progressBar.setMaximum(i.length);
 		ID.progressBar.setMinimum(0);
