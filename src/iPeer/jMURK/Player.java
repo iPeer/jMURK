@@ -7,7 +7,7 @@ import java.util.Random;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class Player {
 	public Player(String n) {
-		String inventory = "Baul|5,Wooden Sword|1,Leather Slacks|1,Leather Tunic|1,Leather Cap|1,Golden Pendant|1";
+		String inventory = "Baul|5,Wooden Sword|1,Leather Slacks|1,Leather Tunic|1,Leather Cap|1,Gold Pendant|1";
 		Random r = new Random();
 		int Time = r.nextInt(1439);
 		p.put("Time", Integer.toString(Time));

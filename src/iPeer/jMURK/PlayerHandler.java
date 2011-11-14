@@ -11,24 +11,26 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 @SuppressWarnings( {"unchecked", "static-access", "unused"} )
 public class PlayerHandler {
 
 	public PlayerHandler() { }
-	
+
 	public static void unloadGame() {
 		save(0);
 		plyr.p.clear();
 	}
-	
+
 	public static void startNewGame(String charname) {
 		System.out.println("Starting new game with name "+charname);
 		plyr = new Player(charname);
 		save(1);
 	}
-	
+
 	public static void save (int auto) 
 	{
 		System.out.println("Player: Attempting to save...");
@@ -74,7 +76,6 @@ public class PlayerHandler {
 				Properties checksum = new Properties();
 				checksum.load(new FileInputStream(f.getParent()+"\\hash"));
 				String cs = Utils.getFileCRC32(f);
-				Debug.p(checksum.get(f.getName().replace(".msf", "")).toString());
 				Debug.p(cs);
 				if (!cs.equals(checksum.get(f.getName().replace(".msf", "")))) {
 					JOptionPane.showMessageDialog(null, "This save file appears to have been edited. Please don't do that ;)");
@@ -82,7 +83,7 @@ public class PlayerHandler {
 				}
 			}
 			catch (Exception e) { ErrorHandler.e(1, "Unable to load checksum for specified save file!"); e.printStackTrace(); return; }
-				Properties l = new Properties();
+			Properties l = new Properties();
 			try {
 				l.load(new FileInputStream(f));
 				plyr.p.putAll(l);
@@ -99,14 +100,14 @@ public class PlayerHandler {
 
 
 	}
-	
+
 	public static void addEXP(int exp) {
 		int XP = Engine.getPlayerEXP();
 		int newEXP = exp + XP;
 		plyr.p.put("EXP", Integer.toString(newEXP));
 		doPlayerLevelUp();		
 	}
-	
+
 	public static void doPlayerLevelUp() {
 		Random r = new Random();
 		int e = Engine.getPlayerEXP();
@@ -136,21 +137,21 @@ public class PlayerHandler {
 		}
 		return mexp;
 	}
-	
+
 	public static void completeQuest(int questID) {
 		int EXP = Engine.getPlayerEXP();
 		// TODO: Finish coding.		
 	}
-	
+
 	public static void addItem (String item, int itemQuant) {
 		/* 
-		* The following regex works in mSL AND PHP. But not in Java. Fuck this shit, man.
-		* 
-		* /,?(Baul\|[0-9]+),?/
-		* /,?(Baul\|\d+),?/
-		* 
-		* * Extra escapes should be added for Java. Still doesn't work, though.
-		*/	
+		 * The following regex works in mSL AND PHP. But not in Java. Fuck this shit, man.
+		 * 
+		 * /,?(Baul\|[0-9]+),?/
+		 * /,?(Baul\|\d+),?/
+		 * 
+		 * * Extra escapes should be added for Java. Still doesn't work, though.
+		 */	
 		// Sadly, this has to be re-done for everything that uses it...
 		String r = "("+item+"\\|[0-9\\.]+)"; // This works...
 		String inv = Engine.getPlayerInventory();
@@ -172,7 +173,7 @@ public class PlayerHandler {
 			plyr.p.put("Inventory", inv);
 		}
 	}
-	
+
 	public static void removeItem (String item, int itemQuant) {
 		// Sadly, this has to be re-done for everything that uses it...
 		String r = "("+item+"\\|[0-9\\.]+)"; // This works...
@@ -214,7 +215,7 @@ public class PlayerHandler {
 			}
 		}
 	}
-	
+
 	public static boolean playerHasItem(String item, int itemQuant) {
 		// Sadly, this has to be re-done for everything that uses it...
 		String r = "("+item+"\\|[0-9\\.]+)";
@@ -233,7 +234,7 @@ public class PlayerHandler {
 		}
 		return false;
 	}
-	
+
 	public static String[] getPlayerArmour() {
 		String playerArmourHead, playerArmourBody, playerArmourLegs, playerArmourShield;
 		playerArmourHead = plyr.p.get("armourHead").toString();
@@ -243,7 +244,7 @@ public class PlayerHandler {
 		String[] armour = {playerArmourHead, playerArmourBody, playerArmourLegs, playerArmourShield};
 		return armour;
 	}
-	
+
 	public static int getDifficulty() {
 		/*
 		 * 
@@ -261,10 +262,49 @@ public class PlayerHandler {
 			return 1;
 		}
 	}
-	
+
+	@SuppressWarnings("rawtypes")
+	public static void listInventory(jMURKInventoryDialog ID, boolean b, boolean c, boolean d, boolean e, boolean f) {
+		String[] i = Engine.getPlayerInventory().split("\\,");
+		ID.progressBar.setMaximum(i.length);
+		ID.progressBar.setMinimum(0);
+		ID.progressBar.setValue(0);
+		ID.progressBar.setVisible(true);
+		DefaultListModel lm = ID.lm;
+		JList list = ID.list;
+		try {
+			for (int x = 0; x < i.length; x++) {
+				String i2 = i[x].split("\\|")[0];
+				String t = ItemHandler.getItemType(i2);
+				if (t.equals("weapon") && b) {
+					lm.add(list.getModel().getSize(), i2);
+				}
+				else if (t.equals("armour") && c) {
+					lm.add(list.getModel().getSize(), i2);
+				}
+				else if (t.equals("aid") && d) {
+					lm.add(list.getModel().getSize(), i2);
+				}
+				else if (t.equals("pendant") && e) {
+					lm.add(list.getModel().getSize(), i2);
+				}
+				else if (t.equals("misc") && f) {
+					lm.add(list.getModel().getSize(), i2);
+				}
+				ID.progressBar.setValue(x + 1);
+				if (x + 1 == ID.progressBar.getMaximum())
+					ID.progressBar.setVisible(false);
+			}
+		} 
+		catch (Item404 e1) {
+			EH.e(1, "Unable to list inventory.");
+		}
+
+	}
+
 	public static Player plyr;
 	public static String tempSaveName;
 	private static Properties chk = new Properties();
 
-	
+
 }

@@ -37,6 +37,16 @@ public class Debug {
 	public static void p(int i) {
 		println(i);
 	}
+
+	public static void p(String[] s) {
+		for (int a = 0;a<s.length;a++) {
+			println("[D] "+s[a]);
+		}
+	}
+
+	public static void p(boolean b) {
+		println(b);
+	}
 	
 	
 }

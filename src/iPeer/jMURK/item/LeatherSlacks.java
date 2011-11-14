@@ -4,7 +4,7 @@ public class LeatherSlacks extends Item {
 
 	public LeatherSlacks() { 
 		
-		name = "Leather Schlacks";
+		name = "Leather Slacks";
 		damReduce = 2;
 		val = 20;
 		subType = "armourLegs";
