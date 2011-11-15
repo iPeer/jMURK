@@ -1,6 +1,8 @@
 package iPeer.jMURK;
 
 
+import iPeer.jMURK.err.Item404;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +22,11 @@ public class jMURKHub extends JFrame {
 	private JPanel contentPane;
 
 	public jMURKHub() {
+		try {
+			Debug.p(ItemHandler.getItemData("TwoNineTwo").repairCost);
+		} catch (Item404 e1) {
+			e1.printStackTrace();
+		}
 		Utils.fixFont(new Font("Tahoma", Font.PLAIN, 11));
 		isOpen = true;
 		setResizable(false);

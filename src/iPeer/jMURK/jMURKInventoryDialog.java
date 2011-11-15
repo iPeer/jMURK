@@ -25,7 +25,6 @@ import javax.swing.SwingConstants;
 @SuppressWarnings("serial")
 public class jMURKInventoryDialog extends JDialog {
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public jMURKInventoryDialog() {
 		if (JMID == null)
 			JMID = this;
@@ -136,11 +135,9 @@ public class jMURKInventoryDialog extends JDialog {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public static DefaultListModel lm;
 	public JPanel contentPanel = new JPanel();
 	public JTable table;
-	@SuppressWarnings("rawtypes")
 	public JList list;
 	public JProgressBar progressBar;
 	private JCheckBox Weapons, Armour, Aid, Pendant, Misc;

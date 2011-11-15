@@ -1,6 +1,6 @@
 package iPeer.jMURK.item;
 
-public class ItemWeapon {
+public class ItemWeapon extends Item {
 
 	public ItemWeapon() {
 		name = "";
@@ -10,10 +10,7 @@ public class ItemWeapon {
 		itemHP = 0;
 		val = 0;
 		type = "Weapon";
+		repairCost = 0;
 	}
-	
-	public String name, type;
-	public boolean hasHP;
-	public int minDam, maxDam, itemHP, val;
 	
 }

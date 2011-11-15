@@ -32,7 +32,6 @@ public class jMURKCombat extends JDialog {
 
 	private final JPanel d = new JPanel();
 	
-	@SuppressWarnings("rawtypes")
 	public jMURKCombat() {
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -198,10 +197,8 @@ public class jMURKCombat extends JDialog {
 		d.add(AutoAttack);
 	}
 	
-	@SuppressWarnings("rawtypes")
 	public JList list, list_1;
 	public static JLabel Playername, Lvl, Ap, Cc, Hp, MonsterName, MonsterHP, MonsterCC, MonsterAP, MonsterLVL;
-	@SuppressWarnings("rawtypes")
 	public DefaultListModel lm, lm2;
 	public JButton Fight, runbutton;
 	public JCheckBox AutoAttack;

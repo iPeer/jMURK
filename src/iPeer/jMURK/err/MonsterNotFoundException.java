@@ -1,5 +1,6 @@
 package iPeer.jMURK.err;
 
+@SuppressWarnings("serial")
 public class MonsterNotFoundException extends Exception {
 
 	public MonsterNotFoundException() {

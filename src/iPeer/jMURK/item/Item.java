@@ -3,7 +3,7 @@ package iPeer.jMURK.item;
 public class Item {
 
 	public Item() {
-		name ="";
+		name = "";
 		HP = 0;
 		AP = 0;
 		CC = 0;
@@ -19,10 +19,12 @@ public class Item {
 		effamount = 0;
 		minDam = 0;
 		maxDam = 0;
+		repairCost = 0;
+		itemHP = 0;
 	}
 	
 	public String name, type, subType, desc, effect;
-	public int HP, AP, CC, val, damReduce, HPboost, effamount, minDam, maxDam;
+	public int HP, AP, CC, val, damReduce, HPboost, effamount, minDam, maxDam, repairCost, itemHP;
 	public boolean overheals, hasHP;
 	
 }

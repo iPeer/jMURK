@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JWindow;
 
+@SuppressWarnings("serial")
 public class AutoSave extends JWindow {
 
 	/**

@@ -143,7 +143,6 @@ public class CombatHandler {
 		PlayerHandler.save(1);
 	}
 	
-	@SuppressWarnings("rawtypes")
 	public static void listAidItems(DefaultListModel lm, JList l) {
 		String in = Engine.getPlayerInventory();
 		String[] i = in.split(",");

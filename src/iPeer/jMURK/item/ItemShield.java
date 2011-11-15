@@ -1,6 +1,6 @@
 package iPeer.jMURK.item;
 
-public class ItemShield {
+public class ItemShield extends Item {
 
 	public ItemShield() {
 
@@ -13,11 +13,8 @@ public class ItemShield {
 		effect = "";
 		effamount = 0;
 		val = 0;
+		desc = "none";
 		
 	}
-	
-	public String name, type, effect;
-	public boolean hasHP;
-	public int val, effamount, damReduce, HP, HPboost;
 
 }

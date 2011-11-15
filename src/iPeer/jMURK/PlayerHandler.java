@@ -263,7 +263,6 @@ public class PlayerHandler {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public static void listInventory(jMURKInventoryDialog ID, boolean b, boolean c, boolean d, boolean e, boolean f) {
 		System.out.println(ID);
 		String[] i = Engine.getPlayerInventory().split("\\,");
@@ -276,21 +275,22 @@ public class PlayerHandler {
 		try {
 			for (int x = 0; x < i.length; x++) {
 				String i2 = i[x].split("\\|")[0];
+				int i3 = Integer.parseInt(i[x].split("\\|")[1]);
 				String t = ItemHandler.getItemType(i2);
 				if (t.equals("weapon") && b) {
-					lm.add(list.getModel().getSize(), i2);
+					lm.add(list.getModel().getSize(), i2+" ("+i3+")");
 				}
 				else if (t.equals("armour") && c) {
-					lm.add(list.getModel().getSize(), i2);
+					lm.add(list.getModel().getSize(), i2+" ("+i3+")");
 				}
 				else if (t.equals("aid") && d) {
-					lm.add(list.getModel().getSize(), i2);
+					lm.add(list.getModel().getSize(), i2+" ("+i3+")");
 				}
 				else if (t.equals("pendant") && e) {
-					lm.add(list.getModel().getSize(), i2);
+					lm.add(list.getModel().getSize(), i2+" ("+i3+")");
 				}
 				else if (t.equals("misc") && f) {
-					lm.add(list.getModel().getSize(), i2);
+					lm.add(list.getModel().getSize(), i2+" ("+i3+")");
 				}
 				ID.progressBar.setValue(x + 1);
 				if (x + 1 == ID.progressBar.getMaximum())
