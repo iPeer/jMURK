@@ -13,8 +13,16 @@ import java.util.zip.ZipInputStream;
 @SuppressWarnings("static-access")
 public class Engine {
 
+	@SuppressWarnings("unchecked")
 	public static String saveName() {
-		return PlayerHandler.plyr.p.get("SaveName").toString();
+		try {
+			return PlayerHandler.plyr.p.get("SaveName").toString();
+		}
+		catch (NullPointerException e) {
+			String n = PlayerHandler.plyr.p.get("Name").toString();
+			PlayerHandler.plyr.p.put("SaveName", n);
+			return n;
+		}
 	}
 
 	public static int intValue(String key) {

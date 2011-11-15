@@ -1,6 +1,6 @@
 package iPeer.jMURK.item;
 
-public class Baul extends Item {
+public class Baul extends ItemAid {
 
 	public Baul() {
 		

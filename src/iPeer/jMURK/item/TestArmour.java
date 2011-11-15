@@ -1,6 +1,6 @@
 package iPeer.jMURK.item;
 
-public class TestArmour extends Item {
+public class TestArmour extends ItemArmour {
 
 	public TestArmour() {
 

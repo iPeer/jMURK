@@ -12,8 +12,4 @@ public class ItemAid extends Item {
 		
 	}
 	
-	public int HP, val;
-	public String name, type;
-	public boolean overheals;
-	
 }

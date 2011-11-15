@@ -1,6 +1,6 @@
 package iPeer.jMURK.item;
 
-public class GoldPendant extends Item {
+public class GoldPendant extends ItemPendant {
 
 	public GoldPendant() {
 		

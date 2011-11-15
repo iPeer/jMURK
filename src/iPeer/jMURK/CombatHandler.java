@@ -88,6 +88,7 @@ public class CombatHandler {
 		if (playerCHP <= 0)
 			playerIsDead();
 		c.Hp.setText("HP: "+Integer.toString(playerCHP < 0 ? 0 : playerCHP)+"/"+Integer.toString(playerHP));
+		PlayerHandler.plyr.p.put("CHP", Integer.toString(playerCHP));
 		combatTurn = "p";
 		c.Fight.setEnabled(true);
 		c.lm2.add(c.list_1.getModel().getSize(), dam > 0 ? "Opponent hits "+dam : "Opponent misses!");
@@ -130,9 +131,32 @@ public class CombatHandler {
 		playerWins += 1;
 		PlayerHandler.plyr.p.put("Wins", Integer.toString(playerWins));
 		PlayerHandler.save(1);
+		jMURKLootMonster lm = new jMURKLootMonster();
+		PlayerHandler.listInventory(lm.lma);
+		listMonsterInventory(lm.lmb);
+		lm.setTitle("Looting: "+monster.name);
+		lm.setVisible(true);
 		c.dispose();
+		//FIXME: Player is still classed as in combat when the dialog closes.
 	}
 	
+	private static void listMonsterInventory(DefaultListModel l) {
+		Monster m = monster;
+		List<String> d = m.drops;
+		List<Integer> dq = m.dropsnumber;
+		ArrayList<String> ad = new ArrayList<String>();
+		int drops = new Random().nextInt(m.drops.size() + 1);
+		for (;drops > 0; drops--) {
+			int drop = new Random().nextInt(drops);
+			String i = d.get(drop);
+			Debug.p(i);
+			if (!ad.contains(i)) {
+				ad.add(i);
+				l.add(l.getSize(), i+" ("+new Random().nextInt(dq.get(drop) + 1)+")");
+			}
+		}
+	}
+
 	public static void playerRun() {
 		playerIsInCombat = false;
 		monster.isDead = true;

@@ -2,6 +2,7 @@ package iPeer.jMURK;
 
 import iPeer.jMURK.err.Item404;
 import iPeer.jMURK.item.Item;
+import iPeer.jMURK.item.ItemAid;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -109,6 +110,7 @@ public class PlayerHandler {
 	}
 
 	public static void doPlayerLevelUp() {
+		int ol = Engine.getPlayerLevel();
 		Random r = new Random();
 		int e = Engine.getPlayerEXP();
 		int l = Engine.getPlayerLevel();
@@ -116,7 +118,7 @@ public class PlayerHandler {
 		int h = Engine.getPlayerHP();
 		int ccu = Engine.getPlayerCritIncreaseChance(); // TODO: Actually code this...
 		for (; e >= getEXPAtLevel(l + 1); l++) {
-			System.out.println("PLayer is now level "+l);
+			System.out.println("Player is now level "+l);
 			if (r.nextInt(100) <= ccu)
 				c++;
 			h++;
@@ -125,6 +127,8 @@ public class PlayerHandler {
 		plyr.p.put("LVL", Integer.toString(l));
 		plyr.p.put("CC", Integer.toString(c));
 		save(1);
+		if (l > ol)
+			JOptionPane.showMessageDialog(CombatHandler.c, "Congratulations! You have advanced to level "+l+"!");
 	}
 
 	public static int getEXPAtLevel(int l) {
@@ -200,6 +204,8 @@ public class PlayerHandler {
 				Item a = (Item)Class.forName("iPeer.jMURK.item."+aid.replaceAll(" ","")).newInstance();
 				int playerHP = Engine.getPlayerHP();
 				int playerCHP = Engine.getPlayerCHP();
+				Debug.p(a.HP);
+				Debug.p(playerCHP);
 				playerCHP += a.HP;
 				System.out.println("HP after healing: "+playerCHP);
 				if (playerCHP > playerHP && !a.overheals)
@@ -301,6 +307,18 @@ public class PlayerHandler {
 			EH.e(1, "Unable to list inventory.");
 		}
 
+	}
+	
+	public static void listInventory(DefaultListModel l) {
+		String[] i = Engine.getPlayerInventory().split("\\,");
+		for (int a = 0;a < i.length;a++) {
+			String i1 = i[a].split("\\|")[0];
+			String i2 = i1;
+			Debug.p(i[a]);
+			int i3 = Integer.parseInt(i[a].split("\\|")[1]);
+			l.add(l.getSize(), i2+"("+i3+")");
+		}
+		
 	}
 
 	public static Player plyr;
