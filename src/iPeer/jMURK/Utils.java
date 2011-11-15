@@ -4,14 +4,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FilenameFilter;
+import java.security.MessageDigest;
 import java.util.Enumeration;
 
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.tree.DefaultMutableTreeNode;
-
-import com.google.common.io.Files;
 
 @SuppressWarnings("rawtypes")
 public class Utils {
@@ -87,11 +87,24 @@ public class Utils {
 		return d;
 	}
 	
-	public static String getFileCRC32(File f) {
-		String c = "";
-		try { c = Long.toString(Files.getChecksum(new File(f.getAbsolutePath()), new java.util.zip.CRC32())); }
-		catch (Exception e) { ErrorHandler.e(1, "Unable to calculate CRC32."); }
-		return c;
+	public static String getFileMD5(File f) throws Exception {
+		MessageDigest m = MessageDigest.getInstance("MD5");
+		FileInputStream i = new FileInputStream(f);
+		
+		byte[] db = new byte[1024];
+		
+		for (int n = 0; (n = i.read(db)) != -1;) {
+			m.update(db, 0, n);
+		}
+		
+		byte[] m2 = m.digest();
+		
+		StringBuffer s = new StringBuffer();
+		for (int i2 = 0; i2 < m2.length; i2++) {
+			s.append(Integer.toString((m2[i2] & 0xff) + 0x100, 16).substring(1));
+		}
+		
+		return s.toString();
 	}
 
 	public static String getPathToJar() {

@@ -59,11 +59,11 @@ public class PlayerHandler {
 				e.printStackTrace();
 			}
 			try { 
-				String chksum = Utils.getFileCRC32(sf);
+				String chksum = Utils.getFileMD5(sf);
 				chk.put(auto == 1 ? "autosave" : "save", chksum);
 				File chko = new File(sd, "hash");
 				chk.store(new FileOutputStream(chko), "jMURK Save Checksums");
-				System.out.println("Save file's CRC32 is: "+chksum);
+				System.out.println("Save file's MD5 is: "+chksum);
 			}
 			catch (Exception e) { ErrorHandler.e(1, "Unable to generate CRC32 for save file."); e.printStackTrace(); }
 		}
@@ -76,9 +76,9 @@ public class PlayerHandler {
 			try {
 				Properties checksum = new Properties();
 				checksum.load(new FileInputStream(f.getParent()+"\\hash"));
-				String cs = Utils.getFileCRC32(f);
-				Debug.p(cs);
-				if (!cs.equals(checksum.get(f.getName().replace(".msf", "")))) {
+				String md5 = Utils.getFileMD5(f);
+				Debug.p(md5);
+				if (!md5.equals(checksum.get(f.getName().replace(".msf", "")))) {
 					JOptionPane.showMessageDialog(null, "This save file appears to have been edited. Please don't do that ;)");
 					return;
 				}
