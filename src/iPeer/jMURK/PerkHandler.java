@@ -3,6 +3,7 @@ package iPeer.jMURK;
 import iPeer.jMURK.Perks.Perk;
 import iPeer.jMURK.err.NoSuchPerkException;
 
+@SuppressWarnings("static-access")
 public class PerkHandler {
 	
 	public PerkHandler() { }

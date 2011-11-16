@@ -72,7 +72,7 @@ public class PlayerHandler {
 	}
 	public void load (File f) {
 		if (plyr.p.isEmpty())
-			ErrorHandler.e(4, "Trying to load file into empty hash.");
+			ErrorHandler.e(5, "Trying to load file into empty hash.");
 		System.out.println(f.getAbsolutePath());
 		if (f.exists()) {
 			try {
@@ -98,6 +98,7 @@ public class PlayerHandler {
 			}
 			catch (Exception e) {
 				ErrorHandler.e(1,"Player: Unable to load save file: "+e);
+				e.printStackTrace();
 			}
 		}
 

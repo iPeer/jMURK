@@ -79,7 +79,8 @@ public class jMURKHub extends JFrame {
 		btnFightNow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					CombatHandler.combatInit(1);
+					if (!CombatHandler.playerIsInCombat)
+						CombatHandler.combatInit(1);
 				} catch (Exception e) {
 					ErrorHandler.e(1, "Unable to initiate combat!");
 					e.printStackTrace();
@@ -115,6 +116,21 @@ public class jMURKHub extends JFrame {
 		GameTime.setHorizontalAlignment(SwingConstants.CENTER);
 		GameTime.setBounds(10, 97, 89, 14);
 		contentPane.add(GameTime);
+		
+		JButton startup = new JButton("Start/Load");
+		startup.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (JOptionPane.showConfirmDialog(getContentPane(), "This will quit your current game.\nAre you sure you want to return to the menu?", "Return to menu?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+					PlayerHandler.unloadGame();
+					jMURKStartDialog j = new jMURKStartDialog();
+					j.create();
+					dispose();
+				}
+			}
+		});
+		startup.setToolTipText("Allows you to start a new, or load another game.");
+		startup.setBounds(10, 195, 89, 23);
+		contentPane.add(startup);
 		
 	}
 	

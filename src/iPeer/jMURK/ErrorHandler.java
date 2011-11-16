@@ -22,6 +22,8 @@ public class ErrorHandler {
 			return "FILE I/O: ";
 		case 4:
 			return "WARNING: ";
+		case 5:
+			return "INFO: ";
 		default:
 			return "Unknown: ";
 		}

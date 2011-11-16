@@ -197,6 +197,7 @@ public class jMURKCombat extends JDialog {
 		AutoAttack.setToolTipText("You will automatically attack your opponent 1 tick after they have made their attack.");
 		AutoAttack.setBounds(57, 109, 83, 23);
 		d.add(AutoAttack);
+		setLocation((Utils.resolution().width - getWidth()) / 2, (Utils.resolution().height - getHeight()) / 2);
 	}
 	
 	public JList list, list_1;

@@ -37,6 +37,6 @@ public class Player {
 	public int HP, AP, CC, Wins, Loses, Coins, StealSuccess, StealFail, FoundItems;
 	public String Name, SaveName, tempSaveName;
 	public static Hashtable p = new Hashtable();
-	public List<String> perks;
+	public static List<String> perks;
 
 }

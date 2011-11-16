@@ -40,12 +40,20 @@ public class jMURKLoadGame extends JDialog {
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Object[] pa = tree.getSelectionPath().getPath();
-				if (tree.getSelectionPath().getPathCount() < 3) {
-					JOptionPane.showMessageDialog(getContentPane(), "The file you selected is not a valid save file.", "Errorous save file selected", JOptionPane.ERROR_MESSAGE);
-					return;
+				int f2 = tree.getSelectionPath().getPathCount();
+				File f;
+				if (f2 < 3) {
+					if (f2 < 2) {
+						JOptionPane.showMessageDialog(getContentPane(), "The file you selected is not a valid save file.", "Errorous save file selected", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					else {
+						f = Engine.getMostRecentSave(pa[1].toString());
+					}
 				}
-				String fileString = pa[0]+"/"+pa[1]+"/"+pa[2];
-				File f = new File(fileString);
+				else { 
+					f = new File(pa[0]+"/"+pa[1]+"/"+pa[2]);
+				}
 				PlayerHandler pl = new PlayerHandler();
 				setVisible(false);
 				jMURKStartDialog.hide();

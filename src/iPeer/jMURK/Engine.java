@@ -142,7 +142,7 @@ public class Engine {
 	public static int getPlayerWins() {
 		return intValue("Wins");
 	}
-	
+
 	public static int getPlayerLoses() {
 		return intValue("Loses");
 	}
@@ -164,7 +164,7 @@ public class Engine {
 			return "None";
 		}
 	}
-	
+
 	public static String getTicksAsGameTime(int t) {
 		try {
 			String m2 = "00";
@@ -173,16 +173,16 @@ public class Engine {
 			sec = t%60;
 			if (Settings.getBooleanSetting("12hrclock") && min > 12)
 				m2 = min < 10 ? "0"+Integer.toString(min) : Integer.toString(min - 12);
-			else
-				m2 = min < 10 ? "0"+Integer.toString(min) : Integer.toString(min);
-			String s2 = sec < 10 ? "0"+Integer.toString(sec) : Integer.toString(sec);
-			return m2+":"+s2;
+				else
+					m2 = min < 10 ? "0"+Integer.toString(min) : Integer.toString(min);
+					String s2 = sec < 10 ? "0"+Integer.toString(sec) : Integer.toString(sec);
+					return m2+":"+s2;
 		}
 		catch (NullPointerException e) {
 			return "00:00";
 		}
 	}
-	
+
 	public static String getTimeOfDayFromTicks(int t) {
 		if (Utils.isBetween(t,0,719))
 			return "Morning";
@@ -199,23 +199,34 @@ public class Engine {
 			return f2;
 		return f1;
 	}
-	
+
 	public static List<String> getPerksAsList() {
-		String[] p = Engine.getPlayerPerks().split("\\,");
 		List<String> p2 = new ArrayList<String>();
-		for (int a = 0; a < p.length; a++) {
-			p2.add(p[a]);
+		try {
+			String[] p = Engine.getPlayerPerks().split("\\,");
+			Debug.p(p);
+			for (int a = 0; a < p.length; a++) {
+				p2.add(p[a]);
+			}
+		}
+		catch (/*NullPointer*/Exception n) {
+			p2.add("Perky Perk");
 		}
 		return p2;
 	}
-	
+
 	public static String getPerksAsString() {
-		List<String> p = PlayerHandler.plyr.perks;
-		String s = new String();
-		for (int a = 0; a < p.size(); a++) {
-			s = s+(a > 0 ? "," : "")+p.get(a);
+		try {
+			List<String> p = PlayerHandler.plyr.perks;
+			String s = new String();
+			for (int a = 0; a < p.size(); a++) {
+				s = s+(a > 0 ? "," : "")+p.get(a);
+			}
+			return s;
 		}
-		return s;
+		catch (NullPointerException n) {
+			return "Perky Perk";
+		}
 	}
 
 	private static String getPlayerPerks() {
