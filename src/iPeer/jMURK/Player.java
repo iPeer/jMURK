@@ -1,7 +1,7 @@
 package iPeer.jMURK;
 
-//import java.io.*;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Random;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -16,6 +16,7 @@ public class Player {
 		p.put("EXP", Integer.toString(60));
 		p.put("LVL", Integer.toString(1));
 		p.put("Inventory", inventory);
+		p.put("Perks", "Perky Perk");
 		p.put("armourHead", "Leather Cap");
 		p.put("armourTorso", "Leather Tunic");
 		p.put("armourLegs", "Leather Slacks");
@@ -36,5 +37,6 @@ public class Player {
 	public int HP, AP, CC, Wins, Loses, Coins, StealSuccess, StealFail, FoundItems;
 	public String Name, SaveName, tempSaveName;
 	public static Hashtable p = new Hashtable();
+	public List<String> perks;
 
 }

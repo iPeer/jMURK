@@ -29,6 +29,7 @@ public class PlayerHandler {
 	public static void startNewGame(String charname) {
 		System.out.println("Starting new game with name "+charname);
 		plyr = new Player(charname);
+		plyr.perks = Engine.getPerksAsList();
 		save(1);
 	}
 
@@ -50,6 +51,7 @@ public class PlayerHandler {
 			Properties sf2 = new Properties();
 			try
 			{
+				plyr.p.put("Perks", Engine.getPerksAsString());
 				sf2.putAll(plyr.p);
 				sf2.store(new FileOutputStream(sf), "jMURK Save Game");
 				System.out.println("Player: Save successful.");
@@ -88,6 +90,7 @@ public class PlayerHandler {
 			try {
 				l.load(new FileInputStream(f));
 				plyr.p.putAll(l);
+				plyr.perks = Engine.getPerksAsList();
 				GameTick.tickTime = Integer.parseInt(plyr.p.get("Time").toString());
 				GameTick gt = new GameTick();
 				gt.start();
@@ -319,6 +322,7 @@ public class PlayerHandler {
 		}
 		
 	}
+	
 
 	public static Player plyr;
 	public static String tempSaveName;

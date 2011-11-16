@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.security.CodeSource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -196,6 +198,33 @@ public class Engine {
 		if (f1.lastModified() < f2.lastModified())
 			return f2;
 		return f1;
+	}
+	
+	public static List<String> getPerksAsList() {
+		String[] p = Engine.getPlayerPerks().split("\\,");
+		List<String> p2 = new ArrayList<String>();
+		for (int a = 0; a < p.length; a++) {
+			p2.add(p[a]);
+		}
+		return p2;
+	}
+	
+	public static String getPerksAsString() {
+		List<String> p = PlayerHandler.plyr.perks;
+		String s = new String();
+		for (int a = 0; a < p.size(); a++) {
+			s = s+(a > 0 ? "," : "")+p.get(a);
+		}
+		return s;
+	}
+
+	private static String getPlayerPerks() {
+		try {
+			return PlayerHandler.plyr.p.get("Perks").toString();
+		}
+		catch (NullPointerException e) {
+			return "Perky Perk";
+		}
 	}
 
 }
