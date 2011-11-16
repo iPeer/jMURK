@@ -6,7 +6,7 @@ public class ErrorHandler {
 	}
 	
 	public static void e(int code, String text) {
-		Debug.println(e(code)+" - "+text);		
+		Debug.println(e(code)+text);		
 	}
 	public static void e(int c, Exception e) {
 		e(c, e.getMessage());
@@ -15,13 +15,15 @@ public class ErrorHandler {
 	public static String e (int i) {
 		switch (i) {
 		case 1:
-			return "FATAL";
+			return "FATAL: ";
 		case 2:
-			return "SEVERE";
+			return "SEVERE: ";
 		case 3:
-			return "FILE I/O";
+			return "FILE I/O: ";
+		case 4:
+			return "WARNING: ";
 		default:
-			return "Unknown";
+			return "Unknown: ";
 		}
 	}
 }

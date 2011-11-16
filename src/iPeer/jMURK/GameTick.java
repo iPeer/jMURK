@@ -38,13 +38,11 @@ public class GameTick {
 	public static void tick() {
 		PlayerHandler.plyr.p.put("Time", Integer.toString(tickTime));
 		String t = Engine.getTicksAsGameTime(tickTime);
-		//Debug.p(t);
 		jMURKHub.updatejMURKHub(Engine.getTimeOfDayFromTicks(tickTime)+", "+t);
 		if (tickTime == 1439)
 			tickTime = -1;
 		tickTime++;
 		if (CombatHandler.playerIsInCombat) {
-			//System.out.println(CombatHandler.playerIsInCombat + " / "+CombatHandler.combatTurn);
 			if (CombatHandler.combatTurn == "o")
 				CombatHandler.monsterAttack();
 			if (CombatHandler.combatTurn == "p" && Engine.useAutoAttack())

@@ -98,6 +98,8 @@ public class CombatHandler {
 		playerIsInCombat = false;
 		isPlayerDead = true;
 		playerCoins -= (monster.exp * playerDifficultyMulti);
+		PlayerHandler p = new PlayerHandler();
+		p.load(Engine.getMostRecentSave(Engine.getPlayerName()));
 		PlayerHandler.plyr.p.put("Coins", Integer.toString(playerCoins));
 		playerLoses += 1;
 		PlayerHandler.plyr.p.put("Loses", Integer.toString(playerLoses));
@@ -137,7 +139,6 @@ public class CombatHandler {
 		lm.setTitle("Looting: "+monster.name);
 		lm.setVisible(true);
 		c.dispose();
-		//FIXME: Player is still classed as in combat when the dialog closes.
 	}
 	
 	private static void listMonsterInventory(DefaultListModel l) {
@@ -145,14 +146,14 @@ public class CombatHandler {
 		List<String> d = m.drops;
 		List<Integer> dq = m.dropsnumber;
 		ArrayList<String> ad = new ArrayList<String>();
-		int drops = new Random().nextInt(m.drops.size() + 1);
+		int drops = new Random().nextInt(m.drops.size()) + 1;
 		for (;drops > 0; drops--) {
 			int drop = new Random().nextInt(drops);
 			String i = d.get(drop);
 			Debug.p(i);
 			if (!ad.contains(i)) {
 				ad.add(i);
-				l.add(l.getSize(), i+" ("+new Random().nextInt(dq.get(drop) + 1)+")");
+				l.add(l.getSize(), i+" ("+(new Random().nextInt(dq.get(drop))+1)+")");
 			}
 		}
 	}

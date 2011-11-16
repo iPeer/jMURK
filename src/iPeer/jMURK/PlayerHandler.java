@@ -65,12 +65,12 @@ public class PlayerHandler {
 				chk.store(new FileOutputStream(chko), "jMURK Save Checksums");
 				System.out.println("Save file's MD5 is: "+chksum);
 			}
-			catch (Exception e) { ErrorHandler.e(1, "Unable to generate CRC32 for save file."); e.printStackTrace(); }
+			catch (Exception e) { ErrorHandler.e(1, "Unable to generate MD5 for save file."); e.printStackTrace(); }
 		}
 	}
 	public void load (File f) {
 		if (plyr.p.isEmpty())
-			ErrorHandler.e(2, "Trying to load file into empty hash.");
+			ErrorHandler.e(4, "Trying to load file into empty hash.");
 		System.out.println(f.getAbsolutePath());
 		if (f.exists()) {
 			try {
@@ -88,7 +88,6 @@ public class PlayerHandler {
 			try {
 				l.load(new FileInputStream(f));
 				plyr.p.putAll(l);
-				//l.putAll(plyr.p);
 				GameTick.tickTime = Integer.parseInt(plyr.p.get("Time").toString());
 				GameTick gt = new GameTick();
 				gt.start();
@@ -116,7 +115,7 @@ public class PlayerHandler {
 		int l = Engine.getPlayerLevel();
 		int c = Engine.getPlayerCC();
 		int h = Engine.getPlayerHP();
-		int ccu = Engine.getPlayerCritIncreaseChance(); // TODO: Actually code this...
+		int ccu = Engine.getPlayerCritIncreaseChance();
 		for (; e >= getEXPAtLevel(l + 1); l++) {
 			System.out.println("Player is now level "+l);
 			if (r.nextInt(100) <= ccu)

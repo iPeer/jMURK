@@ -35,10 +35,11 @@ public class jMURKCombat extends JDialog {
 	public jMURKCombat() {
 		addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosed(WindowEvent arg0) {
-				if (CombatHandler.playerIsInCombat) //FIXME: Player is still classed as in combat
+			public void windowClosing(WindowEvent e) {
+				if (CombatHandler.playerIsInCombat) {
 					CombatHandler.playerRun();
 					Debug.p("Player X'd out of Combat, treating as run away.");
+				}
 			}
 		});
 		Utils.fixFont(new Font("Tahoma", Font.PLAIN, 11));

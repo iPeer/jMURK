@@ -190,4 +190,12 @@ public class Engine {
 			return "Night";
 	}
 
+	public static File getMostRecentSave(String charname) {
+		File f1 = new File("saves/"+charname+"/save.msf");
+		File f2 = new File("saves/"+charname+"/autosave.msf");
+		if (f1.lastModified() < f2.lastModified())
+			return f2;
+		return f1;
+	}
+
 }

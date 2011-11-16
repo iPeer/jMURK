@@ -65,7 +65,7 @@ public class jMURKLootMonster extends JDialog {
 						String t = l.getSelectedValue().toString();
 						int s = l.getSelectedIndex();
 						lmb.remove(s);
-						lmb.add(s, t.replaceAll(Integer.toString(q), Integer.toString(q1)));
+						lmb.add(s, t.replaceAll(Integer.toString(q), Integer.toString(q - q1)));
 					}
 					lma.clear();
 					PlayerHandler.listInventory(lma);

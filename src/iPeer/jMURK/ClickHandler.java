@@ -7,15 +7,16 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+// TODO: Move these routines to the classes of the respective windows.
+
 public class ClickHandler {
 
 	@SuppressWarnings({ "unchecked", "static-access" })
 	public static void ClickJDialog (String win, ActionEvent e, JDialog d) {
 		String cmd = e.getActionCommand();
 		if (win == "jMURKTestDialog") {
-			if (cmd == "Close Me") { ExitHandler.closeJDialog(d); }
+			if (cmd == "Close Me") { d.dispose(); }
 			else if (cmd == "Save Game") {
-				//PlayerHandler.startNewGame("Testing new Loading and Saving");
 				System.out.println(Engine.getPlayerHP());
 				System.out.println(PlayerHandler.plyr.p.get("Name"));
 				PlayerHandler.plyr.p.put("CC", Integer.toString(1337));
@@ -23,7 +24,6 @@ public class ClickHandler {
 
 			}
 			else if (cmd == "Load Game") {
-				//PlayerHandler pl = new PlayerHandler();
 				pl.load(new File("saves/Test Save.msf"));
 			}
 		}
@@ -40,7 +40,7 @@ public class ClickHandler {
 				if (JOptionPane.showOptionDialog(f, "Are you sure you want to quit jMURK?", "Confirm Exit", 0, 0, null, null, null) == 0) {
 					if (Engine.isGameLoaded()) { PlayerHandler.unloadGame(); }
 					System.out.println("Closed!");
-					ExitHandler.closeJFrame(f);
+					f.dispose();
 					System.exit(0);
 				}
 			}
@@ -52,8 +52,8 @@ public class ClickHandler {
 		else if (win == "jMURKStartDialog")
 			if (cmd == "Quit jMURK") {
 				if (Engine.isGameLoaded())
-					PlayerHandler.unloadGame(); // DEBUG: The game has no "real" quit button yet, so this acts as it for now.
-				ExitHandler.closeJFrame(f);
+					PlayerHandler.unloadGame();
+				f.dispose();
 				System.exit(0);
 			}
 			else if (cmd == "New Game") {
@@ -62,16 +62,10 @@ public class ClickHandler {
 					File f1 = new File("saves/"+charname+"/save.msf");
 					File f2 = new File("saves/"+charname+"/autosave.msf");
 					Debug.p(f1);
-					/*if ((f1.exists() || f2.exists() && 
-							JOptionPane.showOptionDialog(f, "A character with this save name already exists. Do you want to create a new save and overwrite the existing one?", "Save file exists!", JOptionPane.YES_NO_OPTION, 0, null, null, JOptionPane.NO_OPTION) == JOptionPane.YES_OPTION) 
-							|| !f1.exists() && !f2.exists()) {*/
 					if (f1.exists() || f2.exists()) {
 						if (JOptionPane.showOptionDialog(f, "A save file already exists for that profile name. \nDo you want to load this game?", "File exists", JOptionPane.YES_NO_OPTION, 0, null, null, null) == JOptionPane.YES_OPTION) {
 							PlayerHandler PH = new PlayerHandler();
-							if (f1.lastModified() < f2.lastModified())
-								PH.load(f2);
-							else
-								PH.load(f1);
+							PH.load(Engine.getMostRecentSave(charname));
 							f.dispose();
 							InterfaceHandler.jMURKHub();
 							JOptionPane.showMessageDialog(f, "Loaded most recent save.");
