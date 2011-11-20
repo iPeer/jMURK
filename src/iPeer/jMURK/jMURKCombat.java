@@ -158,6 +158,7 @@ public class jMURKCombat extends JDialog {
 		
 		lm2 = new DefaultListModel();
 		list_1 = new JList(lm2);
+		list_1.setVisibleRowCount(1);
 		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list_1.setEnabled(false);
 		list_1.setBounds(195, 139, 237, 116);

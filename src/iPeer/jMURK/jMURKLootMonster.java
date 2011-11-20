@@ -51,7 +51,7 @@ public class jMURKLootMonster extends JDialog {
 					int q = Integer.parseInt(i.replaceAll("\\)","").split("\\(")[1]), q1 = 0;
 					String i2 = i.split("\\(")[0];
 					String i3 = i2.substring(0, i2.length() - 1);
-					if (q > 4) {
+					if (q > 1) {
 						q1 = Integer.parseInt(JOptionPane.showInputDialog("How many would you like to take?"));
 						//q = q1 > q ? q : q1;
 					}

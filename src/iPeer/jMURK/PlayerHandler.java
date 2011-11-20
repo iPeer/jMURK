@@ -92,8 +92,10 @@ public class PlayerHandler {
 				plyr.p.putAll(l);
 				plyr.perks = Engine.getPerksAsList();
 				GameTick.tickTime = Integer.parseInt(plyr.p.get("Time").toString());
+				GameTick.gameDay = Integer.parseInt(plyr.p.get("Day").toString());
 				GameTick gt = new GameTick();
 				gt.start();
+				GameTick.tick();
 				System.out.println("Player: Loaded save game successfully.");
 			}
 			catch (Exception e) {

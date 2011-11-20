@@ -37,11 +37,18 @@ public class GameTick {
 	@SuppressWarnings({ "unchecked", "static-access" })
 	public static void tick() {
 		PlayerHandler.plyr.p.put("Time", Integer.toString(tickTime));
+		PlayerHandler.plyr.p.put("Day", Integer.toString(gameDay));
 		String t = Engine.getTicksAsGameTime(tickTime);
-		jMURKHub.updatejMURKHub(Engine.getTimeOfDayFromTicks(tickTime)+", "+t);
-		if (tickTime == 1439)
+		String t1 = Engine.getDay(gameDay);
+		jMURKHub.updatejMURKHub(t1+", "+t+(Engine.isNight() ? "*" : ""));
+		if (tickTime == 1439) {
 			tickTime = -1;
-		tickTime++;
+			if (gameDay == 7)
+				gameDay = 0;
+			gameDay++;
+		}
+		if (!Debug.timeIsLocked)
+			tickTime++;
 		if (CombatHandler.playerIsInCombat) {
 			if (CombatHandler.combatTurn == "o")
 				CombatHandler.monsterAttack();
@@ -51,6 +58,7 @@ public class GameTick {
 	}
 
 	static int tickTime = 0;
+	static int gameDay = 1;
 
 
 }

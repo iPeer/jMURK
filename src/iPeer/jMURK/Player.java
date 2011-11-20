@@ -10,6 +10,8 @@ public class Player {
 		String inventory = "Test Aid|9999,Test Weapon|1,Baul|5,Wooden Sword|1,Leather Slacks|1,Leather Tunic|1,Leather Cap|1,Gold Pendant|1";
 		Random r = new Random();
 		int Time = r.nextInt(1439);
+		int Day = r.nextInt(6);
+		p.put("Day", Integer.toString(Day));
 		p.put("Time", Integer.toString(Time));
 		p.put("HP", Integer.toString(100));
 		p.put("CHP", Integer.toString(100));

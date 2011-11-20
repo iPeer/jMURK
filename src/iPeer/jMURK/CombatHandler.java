@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.SwingUtilities;
 
 import iPeer.jMURK.err.Item404;
 import iPeer.jMURK.err.MonsterNotFoundException;
@@ -83,18 +84,24 @@ public class CombatHandler {
 		// Modify damage based upon player stats & bonuses.
 		dam -= Math.floor(dam * ((playerAP > 90 ? 90 : playerAP) / 100)); // Yay easy way to calc percentage!	
 		// Update the players HP.
-		playerCHP -= dam;
-		// Check if the player is dead.
-		if (playerCHP <= 0)
-			playerIsDead();
-		c.Hp.setText("HP: "+Integer.toString(playerCHP < 0 ? 0 : playerCHP)+"/"+Integer.toString(playerHP));
-		PlayerHandler.plyr.p.put("CHP", Integer.toString(playerCHP));
-		combatTurn = "p";
+		if (Debug.canPlayerTakeDamage) {
+			playerCHP -= dam;
+			// Check if the player is dead.
+			if (playerCHP <= 0)
+				playerIsDead();
+			c.Hp.setText("HP: "+Integer.toString(playerCHP < 0 ? 0 : playerCHP)+"/"+Integer.toString(playerHP));
+			PlayerHandler.plyr.p.put("CHP", Integer.toString(playerCHP));
+		}
+		if (!Debug.isAlwaysOpponentsTurn)
+			combatTurn = "p";
 		c.Fight.setEnabled(true);
 		c.lm2.add(c.list_1.getModel().getSize(), dam > 0 ? "Opponent hits "+dam : "Opponent misses!");
+		if (c.list_1.getModel().getSize() > 6)
+			c.list_1.ensureIndexIsVisible(c.list_1.getModel().getSize() - 1);
+			
 	}
 	
-	private static void playerIsDead() {
+	static void playerIsDead() {
 		playerIsInCombat = false;
 		isPlayerDead = true;
 		playerCoins -= (monster.exp * playerDifficultyMulti);
@@ -103,6 +110,9 @@ public class CombatHandler {
 		PlayerHandler.plyr.p.put("Coins", Integer.toString(playerCoins));
 		playerLoses += 1;
 		PlayerHandler.plyr.p.put("Loses", Integer.toString(playerLoses));
+		int HP = Engine.getPlayerHP();
+		Debug.p("CHP = "+HP);
+		PlayerHandler.plyr.p.put("CHP", Integer.toString(HP));
 		PlayerHandler.save(1);
 		c.dispose();
 	}
@@ -119,10 +129,13 @@ public class CombatHandler {
 		// Check if the monster is dead
 		if (monster.CHP <= 0)
 			monsterIsDead();
-		combatTurn = "o";
+		if (!Debug.isAlwaysPlayersTurn) 
+			combatTurn = "o";
 		c.Fight.setEnabled(false);
 		c.MonsterHP.setText("HP: "+Integer.toString(monster.CHP < 0 ? 0 : monster.CHP)+"/"+Integer.toString(monster.HP));
 		c.lm2.add(c.list_1.getModel().getSize(), dam > 0 ? "Player hits "+dam : "Player misses!");
+		if (c.list_1.getModel().getSize() > 7)
+			c.list_1.ensureIndexIsVisible(c.list_1.getModel().getSize() - 1);
 	}
 	
 	public static void monsterIsDead() {

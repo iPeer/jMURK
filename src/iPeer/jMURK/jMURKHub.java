@@ -17,8 +17,19 @@ import javax.swing.border.EmptyBorder;
 public class jMURKHub extends JFrame {
 
 	private JPanel contentPane;
+	public static DebugWindow DD = new DebugWindow();
 
 	public jMURKHub() {
+		if (Settings.getBooleanSetting("DebugEnabled")) {
+			try {
+				DD.setVisible(true);
+				Debug.debugCommandsActive = true;
+			}
+			catch (Exception e) {
+				Debug.p("Unable to open Dev Console");
+				e.printStackTrace();
+			}
+		}
 		Utils.fixFont(new Font("Tahoma", Font.PLAIN, 11));
 		isOpen = true;
 		setResizable(false);
@@ -51,6 +62,7 @@ public class jMURKHub extends JFrame {
 		JButton Options = new JButton("Options");
 		Options.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//TODO
 			}
 		});
 		Options.setToolTipText("Confirgure jMURK.");

@@ -176,20 +176,17 @@ public class Engine {
 				else
 					m2 = min < 10 ? "0"+Integer.toString(min) : Integer.toString(min);
 					String s2 = sec < 10 ? "0"+Integer.toString(sec) : Integer.toString(sec);
-					return m2+":"+s2;
+					return m2+":"+s2+isAMorPM(t);
 		}
 		catch (NullPointerException e) {
 			return "00:00";
 		}
 	}
 
-	public static String getTimeOfDayFromTicks(int t) {
+	public static String isAMorPM(int t) {
 		if (Utils.isBetween(t,0,719))
-			return "Morning";
-		else if (Utils.isBetween(t,720,1079))
-			return "Afternoon";
-		else
-			return "Night";
+			return "AM";
+		return "PM";
 	}
 
 	public static File getMostRecentSave(String charname) {
@@ -235,6 +232,30 @@ public class Engine {
 		}
 		catch (NullPointerException e) {
 			return "Perky Perk";
+		}
+	}
+
+	public static boolean isNight() {
+		int t = GameTick.tickTime;
+		return (Utils.isBetween(t, -1, 360) || Utils.isBetween(t,1200, 1439));
+	}
+	
+	public static String getDay(int i) {
+		switch (i) {
+		case 0:
+			return "Mon";
+		case 1:
+			return "Tue";
+		case 2:
+			return "Wed";
+		case 3:
+			return "Thurs";
+		case 4:
+			return "Fri";
+		case 5:
+			return "Sat";
+		default:
+			return "Sun";
 		}
 	}
 

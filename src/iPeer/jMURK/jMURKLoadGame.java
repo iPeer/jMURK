@@ -59,7 +59,7 @@ public class jMURKLoadGame extends JDialog {
 				jMURKStartDialog.hide();
 				pl.load(f);
 				InterfaceHandler.jMURKHub();
-				jMURKHub.updatejMURKHub(Engine.getTimeOfDayFromTicks(GameTick.tickTime)+", "+Engine.getTicksAsGameTime(GameTick.tickTime));
+				GameTick.tick();
 			}
 		});
 		JScrollPane scrollPane = new JScrollPane(tree);

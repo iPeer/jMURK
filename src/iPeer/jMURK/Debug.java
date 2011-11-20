@@ -65,5 +65,20 @@ public class Debug {
 		System.out.println(f);
 	}
 	
+	public static void c(String s) {
+		DebugWindow dw = jMURKHub.DD;
+		dw.lm.add(dw.list.getModel().getSize(), s);	
+		dw.list.ensureIndexIsVisible(dw.list.getModel().getSize() - 1);		
+	}
+	public static void c(boolean b) {
+		c(Boolean.toString(b));	
+	}
+	
+	protected static boolean debugCommandsActive = false;
+	protected static boolean isAlwaysPlayersTurn = false;
+	protected static boolean isAlwaysOpponentsTurn = false;
+	protected static boolean canPlayerTakeDamage = true;
+	protected static boolean timeIsLocked = false;
+	
 	
 }
