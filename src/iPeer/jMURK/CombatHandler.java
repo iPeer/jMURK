@@ -5,7 +5,6 @@ import java.util.*;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import javax.swing.SwingUtilities;
 
 import iPeer.jMURK.err.Item404;
 import iPeer.jMURK.err.MonsterNotFoundException;
@@ -20,8 +19,10 @@ public class CombatHandler {
 		c = new jMURKCombat();
 		Random r = new Random();
 		int i = r.nextInt(type == 1 ? MonsterList.length : BossList.length);
-		i = -1; // DEBUG
-		String m = type == 1 ? MonsterList[i + 1] : BossList[i + 1];;
+		if (i == 0)
+			i++;
+		//i = -1; // DEBUG
+		String m = type == 1 ? MonsterList[i] : BossList[i];
 		System.out.println(m);
 		playerHP = Engine.getPlayerHP();
 		playerCHP = Engine.getPlayerCHP();
@@ -205,7 +206,7 @@ public class CombatHandler {
 	public String[] playerArmour = PlayerHandler.getPlayerArmour(); // 0 = head, 1 = body, 2 = legs, 3 = shield
 	private static Monster monster;
 	public static List<String> monsters = new ArrayList<String>();
-	private static String[] MonsterList = {"Test Monster"};
+	private static String[] MonsterList = {"Test Monster", "Baby Dragon"};
 	private static String[] BossList = {"Test Boss"};
 	public static jMURKCombat c;
 }

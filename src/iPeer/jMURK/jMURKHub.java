@@ -3,6 +3,7 @@ package iPeer.jMURK;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -143,6 +144,18 @@ public class jMURKHub extends JFrame {
 		startup.setToolTipText("Allows you to start a new, or load another game.");
 		startup.setBounds(10, 195, 89, 23);
 		contentPane.add(startup);
+		UpdateStatus.setText("Checking...");
+		try {
+			double v = Version.checkVersion();
+			String s = "No updates available";
+			if (v > Version.version)
+				s = "Update Available!";
+			else
+				s = "No updates available";
+			UpdateStatus.setText(s);
+		} catch (IOException e) {
+			UpdateStatus.setText("Can't check for update");
+		}
 		
 	}
 	

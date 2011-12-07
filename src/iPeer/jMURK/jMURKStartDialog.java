@@ -68,5 +68,6 @@ public class jMURKStartDialog implements ActionListener {
 	private static JFrame f;
 	private JButton b, b2, b3;
 	private JLabel l;
+	public static jMURKHub m = new jMURKHub();
 	
 }

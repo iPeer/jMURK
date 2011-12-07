@@ -1,5 +1,7 @@
 package iPeer.jMURK;
 
+import javax.swing.JOptionPane;
+
 public class GameTick {
 
 	public GameTick() {
@@ -27,7 +29,14 @@ public class GameTick {
 				}
 				catch (Exception e) {
 					ErrorHandler.e(1, "Unable to complete game tick");
+					e.printStackTrace();
 					PlayerHandler.unloadGame();
+					JOptionPane.showMessageDialog(null, "Due to some sort of error, the game is unable to continue. Your current game has been saved and unloaded to prevent data loss.\n\nI would appreciate it if you would report this error to me, when doing so please include the message below:\n\n"+e.getMessage()+"\n\njMURK will now return to the main menu.");
+					jMURKStartDialog.m.dispose();
+					if (CombatHandler.playerIsInCombat)
+						CombatHandler.c.dispose();
+					jMURKStartDialog m = new jMURKStartDialog();
+					m.create();
 					return;
 				}
 			}
