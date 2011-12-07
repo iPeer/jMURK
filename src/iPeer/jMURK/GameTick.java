@@ -32,7 +32,7 @@ public class GameTick {
 					e.printStackTrace();
 					PlayerHandler.unloadGame();
 					JOptionPane.showMessageDialog(null, "Due to some sort of error, the game is unable to continue. Your current game has been saved and unloaded to prevent data loss.\n\nI would appreciate it if you would report this error to me, when doing so please include the message below:\n\n"+e.getMessage()+"\n\njMURK will now return to the main menu.");
-					jMURKStartDialog.m.dispose();
+					jMURKHub.m.dispose();
 					if (CombatHandler.playerIsInCombat)
 						CombatHandler.c.dispose();
 					jMURKStartDialog m = new jMURKStartDialog();

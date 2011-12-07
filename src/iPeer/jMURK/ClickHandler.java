@@ -67,7 +67,7 @@ public class ClickHandler {
 							PlayerHandler PH = new PlayerHandler();
 							PH.load(Engine.getMostRecentSave(charname));
 							f.dispose();
-							jMURKStartDialog.m.setVisible(true);
+							jMURKHub.m.setVisible(true);
 							JOptionPane.showMessageDialog(f, "Loaded most recent save.");
 						}
 						return;

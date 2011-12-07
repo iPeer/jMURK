@@ -166,6 +166,13 @@ public class DebugWindow extends JFrame {
 				PlayerHandler.plyr.p.put("Difficulty", p);
 				Debug.c("Difficulty = "+p+" ("+Engine.getDifficultyMultiplier(Integer.parseInt(p))+")");
 			}
+			else if (c.equals("exitgame-nosave")) {
+				System.exit(0);
+			}
+			else if (c.equals("exitgame")) {
+				PlayerHandler.save(1);
+				System.exit(0);
+			}
 			else {
 				Debug.c("Unknown command - \""+c+"\"");
 			}

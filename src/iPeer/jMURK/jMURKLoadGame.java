@@ -58,7 +58,7 @@ public class jMURKLoadGame extends JDialog {
 				setVisible(false);
 				jMURKStartDialog.hide();
 				pl.load(f);
-				jMURKStartDialog.m.setVisible(true);
+				jMURKHub.m.setVisible(true);
 				GameTick.tick();
 			}
 		});
