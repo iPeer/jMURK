@@ -1,5 +1,7 @@
 package iPeer.jMURK.monster;
 
+import iPeer.jMURK.EnumType;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,10 +23,11 @@ public class Monster {
 		maxdrops = 1;
 		drops = Arrays.asList("Test Weapon", "Test Aid");
 		dropsnumber = Arrays.asList(1337, 9001);
-		type = "normal";
+		type = EnumType.NORMAL;
 	}
 
-	public String name, weapon, type;
+	public String name, weapon;
+	public EnumType type;
 	public int HP, CHP, AP, CC, minDam, maxDam, level, exp, maxdrops, basehp;
 	public boolean isDead;
 	public List<String> drops;

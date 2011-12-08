@@ -98,9 +98,12 @@ public class ItemHandler {
 		}
 	}
 
-	public static int applyTypeEffectiveness(int dam, String type, Item i) {
-		if (type == i.strongAgainst) {
-			dam *= EnumWeaponType.valueOf(type.toUpperCase()).getMuliplier();
+	public static int applyTypeEffectiveness(int dam, EnumType type, EnumType i) {
+		EnumType o = EnumType.valueOf(i.getOpposite());
+		String o2 = i.getOpposite();
+		Debug.p(type.getType()+" = "+o2);
+		if (type.getType().equals(o2)) {
+			dam *= o.getMuliplier();
 			return dam;
 		}
 		return dam;

@@ -128,7 +128,7 @@ public class CombatHandler {
 		dam -= Math.floor(dam * ((monsterAP > 90 ? 90 : monsterAP) / 100));
 		Debug.p(dam);
 		try {
-			dam = ItemHandler.applyTypeEffectiveness(dam, monster.type, ItemHandler.getItemData(Engine.getPlayerWeapon()));
+			dam = ItemHandler.applyTypeEffectiveness(dam, monster.type, ItemHandler.getItemData(Engine.getPlayerWeapon()).weaponType);
 			Debug.p(dam);
 		} catch (Item404 e) {
 			e.printStackTrace();

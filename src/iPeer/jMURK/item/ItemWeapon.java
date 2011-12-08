@@ -1,5 +1,7 @@
 package iPeer.jMURK.item;
 
+import iPeer.jMURK.EnumType;
+
 public class ItemWeapon extends Item {
 
 	public ItemWeapon() {
@@ -11,7 +13,7 @@ public class ItemWeapon extends Item {
 		val = 0;
 		type = "Weapon";
 		repairCost = 0;
-		strongAgainst = "normal";
+		weaponType = EnumType.NORMAL;
 	}
 	
 }

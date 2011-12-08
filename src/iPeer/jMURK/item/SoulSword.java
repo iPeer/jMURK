@@ -1,5 +1,7 @@
 package iPeer.jMURK.item;
 
+import iPeer.jMURK.EnumType;
+
 public class SoulSword extends ItemWeapon {
 
 	public SoulSword() {
@@ -9,7 +11,7 @@ public class SoulSword extends ItemWeapon {
 		minDam = 5;
 		maxDam = 11;
 		type = "Weapon";
-		strongAgainst = "soul";
+		weaponType = EnumType.GHOST;
 
 	}
 

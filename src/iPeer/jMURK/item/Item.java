@@ -1,5 +1,7 @@
 package iPeer.jMURK.item;
 
+import iPeer.jMURK.EnumType;
+
 public class Item {
 
 	public Item() {
@@ -23,7 +25,8 @@ public class Item {
 		itemHP = 0;*/
 	}
 	
-	public String name, type, subType, desc, effect, strongAgainst;
+	public String name, type, subType, desc, effect;
+	public EnumType weaponType;
 	public int HP, AP, CC, val, damReduce, HPboost, effamount, minDam, maxDam, repairCost, itemHP;
 	public boolean overheals, hasHP;
 	

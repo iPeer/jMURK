@@ -1,5 +1,7 @@
 package iPeer.jMURK.monster;
 
+import iPeer.jMURK.EnumType;
+
 import java.util.Arrays;
 
 public class TaintedSoul extends Monster {
@@ -13,10 +15,9 @@ public class TaintedSoul extends Monster {
 		minDam = 3;
 		maxDam = 9;
 		maxdrops = 50;
-		type = "soul";
 		drops = Arrays.asList("Wooden Sword", "Wooden Shield", "Leather Tunic", "Leather Cap", "Leather Slacks", "Soul Sword", "Soul Essence");
 		dropsnumber = Arrays.asList(2, 2, 3, 3, 3, 1, 5);
-		type = "soul";
+		type = EnumType.GHOST;
 		basehp = 70;
 	}
 	
