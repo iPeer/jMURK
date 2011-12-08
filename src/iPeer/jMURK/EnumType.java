@@ -3,7 +3,7 @@ package iPeer.jMURK;
 public enum EnumType { 
 	GHOST("GHOST", 2.0, "DARK"), 
 	FIRE("FIRE", 2.3, "WATER"), 
-	WATER("WATER", 1.7, "FIRE"), 
+	WATER("WATER", 1.7, "ELECTRIC"), 
 	ICE("ICE", 1.3, "FIRE"), 
 	EARTH("EARTH", 2.1, "WATER"), 
 	ELECTRIC("ELECTRIC", 2.5, "EARTH"),
