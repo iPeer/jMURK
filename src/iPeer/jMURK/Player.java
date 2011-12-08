@@ -7,7 +7,7 @@ import java.util.Random;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class Player {
 	public Player(String n) {
-		String inventory = "Test Aid|9999,Test Weapon|1,Baul|5,Wooden Sword|1,Leather Slacks|1,Leather Tunic|1,Leather Cap|1,Gold Pendant|1";
+		String inventory = "Soul Sword|1,Test Aid|9999,Test Weapon|1,Baul|5,Wooden Sword|1,Leather Slacks|1,Leather Tunic|1,Leather Cap|1,Gold Pendant|1";
 		Random r = new Random();
 		int Time = r.nextInt(1439);
 		int Day = r.nextInt(6);
@@ -23,7 +23,7 @@ public class Player {
 		p.put("armourTorso", "Leather Tunic");
 		p.put("armourLegs", "Leather Slacks");
 		p.put("armourShield", "Wooden Shield");
-		p.put("Weapon", /*"Wooden Sword"*/"Test Weapon");
+		p.put("Weapon", /*"Wooden Sword"*/"Soul Sword");
 		p.put("AP", Integer.toString(0));
 		p.put("CC", Integer.toString(0));
 		p.put("Wins", Integer.toString(0));

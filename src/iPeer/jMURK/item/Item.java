@@ -23,7 +23,7 @@ public class Item {
 		itemHP = 0;*/
 	}
 	
-	public String name, type, subType, desc, effect;
+	public String name, type, subType, desc, effect, strongAgainst;
 	public int HP, AP, CC, val, damReduce, HPboost, effamount, minDam, maxDam, repairCost, itemHP;
 	public boolean overheals, hasHP;
 	

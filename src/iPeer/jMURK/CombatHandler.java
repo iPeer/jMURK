@@ -46,7 +46,8 @@ public class CombatHandler {
 		monster.exp *= monster.level;
 		monster.CC *= monster.level;
 		monster.AP *= monster.level;
-		monster.HP *= monster.level;
+		int mhp = monster.basehp + (monster.HP * monster.level);
+		monster.HP = mhp;
 		monster.CHP = monster.HP;
 		combatTurn = r.nextInt(1) == 1 ? "o" : "p";
 		if (combatTurn == "o")
@@ -124,7 +125,15 @@ public class CombatHandler {
 		// Apply monster's AP and other bonuses
 		if (d.nextInt(100) <= (playerCC > 90 ? 90 : playerCC))
 			dam *= 2;
-		dam -= Math.floor(dam * ((monsterAP > 90 ? 90 : monsterAP) / 100));	
+		dam -= Math.floor(dam * ((monsterAP > 90 ? 90 : monsterAP) / 100));
+		Debug.p(dam);
+		try {
+			dam = ItemHandler.applyTypeEffectiveness(dam, monster.type, ItemHandler.getItemData(Engine.getPlayerWeapon()));
+			Debug.p(dam);
+		} catch (Item404 e) {
+			e.printStackTrace();
+		}
+			
 		// Update the monster's HP
 		monster.CHP -= dam;
 		// Check if the monster is dead
@@ -206,7 +215,7 @@ public class CombatHandler {
 	public String[] playerArmour = PlayerHandler.getPlayerArmour(); // 0 = head, 1 = body, 2 = legs, 3 = shield
 	private static Monster monster;
 	public static List<String> monsters = new ArrayList<String>();
-	private static String[] MonsterList = {"Test Monster", "Baby Dragon"};
+	private static String[] MonsterList = {"Test Monster", "Baby Dragon", "Tainted Soul"};
 	private static String[] BossList = {"Test Boss"};
 	public static jMURKCombat c;
 }

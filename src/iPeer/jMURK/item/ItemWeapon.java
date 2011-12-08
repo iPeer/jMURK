@@ -11,6 +11,7 @@ public class ItemWeapon extends Item {
 		val = 0;
 		type = "Weapon";
 		repairCost = 0;
+		strongAgainst = "normal";
 	}
 	
 }

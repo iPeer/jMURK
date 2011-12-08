@@ -11,8 +11,7 @@ import java.util.Properties;
 @SuppressWarnings( {"unchecked", "static-access"} )
 public class ItemHandler {
 
-	public ItemHandler() { 
-	}
+	public ItemHandler() { }
 
 	public static String getItemTypeFromList(String item) {
 		if (Armours.contains(item)) { return "armour"; }
@@ -44,7 +43,7 @@ public class ItemHandler {
 			throw new Item404();
 		}
 	}
-	
+
 	public static boolean doesItemHaveHP(String item) throws Item404 {
 		return getItemData(item).hasHP;
 	}
@@ -61,7 +60,7 @@ public class ItemHandler {
 	public static String getOtherItemValueAsString(String item, String value) { //@deprecated
 		return getOtherItemValue(item, value).toString();
 	}
-	
+
 	public static String getItemType(String i) throws Item404 {
 		try {
 			return getItemData(i).type.toLowerCase();
@@ -71,7 +70,7 @@ public class ItemHandler {
 			return "none";
 		}
 	}
-	
+
 	public static String getItemSubType(String i) throws Item404 {
 		try {
 			return getItemData(i).subType.toLowerCase();
@@ -99,9 +98,18 @@ public class ItemHandler {
 		}
 	}
 
+	public static int applyTypeEffectiveness(int dam, String type, Item i) {
+		if (type == i.strongAgainst) {
+			dam *= EnumWeaponType.valueOf(type.toUpperCase()).getMuliplier();
+			return dam;
+		}
+		return dam;
+	}
+
+
 	public static List<String> Armours = Arrays.asList("Test Armour", "Leather Tunic", "Leather Slacks", "Leather Cap");
-	public static List<String> Weapons = Arrays.asList("Test Weapon", "Wooden Sword");
-	public static List<String> Aid = Arrays.asList("Test Aid", "Baul");
+	public static List<String> Weapons = Arrays.asList("Test Weapon", "Wooden Sword", "Soul Sword");
+	public static List<String> Aid = Arrays.asList("Test Aid", "Baul", "Soul Essence");
 	public static List<String> Pendants = Arrays.asList("Test Pendant", "Golden Pendant");
 	public static List<String> Shields = Arrays.asList("Test Shield", "Wooden Shield");
 	public static List<String> Misc = Arrays.asList("Test Misc");

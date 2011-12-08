@@ -13,6 +13,8 @@ public class BabyDragon extends Monster {
 		minDam = 2;
 		maxDam = 7;
 		maxdrops = 5;
+		type = "dragon";
+		basehp = 50;
 		drops = Arrays.asList("Wooden Sword", "Wooden Shield", "Copper Sword", "Baul");
 		dropsnumber = Arrays.asList(2, 1, 1, 3);
 	}
